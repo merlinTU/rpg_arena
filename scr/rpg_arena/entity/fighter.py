@@ -16,14 +16,17 @@ class Fighter:
         self.defense = player_class.base_defense
         self.res = player_class.base_res
 
-        def level_up():
-            self.level += 1
-            self.hp += np.random.binomial(n=1, p=player_class.growth_hp)
-            self.strength += np.random.binomial(n=1, p=player_class.growth_str)
-            self.magic += np.random.binomial(n=1, p=player_class.growth_magic)
-            self.skill += np.random.binomial(n=1, p=player_class.growth_skill)
-            self.speed += np.random.binomial(n=1, p=player_class.growth_speed)
-            self.luck += np.random.binomial(n=1, p=player_class.growth_luck)
-            self.defense += np.random.binomial(n=1, p=player_class.growth_defense)
+    def level_up(self):
+        self.level += 1
+        self.hp += np.random.binomial(n=1, p=self.player_class.growth_hp)
+        self.strength += np.random.binomial(n=1, p=self.player_class.growth_str)
+        self.magic += np.random.binomial(n=1, p=self.player_class.growth_magic)
+        self.skill += np.random.binomial(n=1, p=self.player_class.growth_skill)
+        self.speed += np.random.binomial(n=1, p=self.player_class.growth_speed)
+        self.luck += np.random.binomial(n=1, p=self.player_class.growth_luck)
+        self.defense += np.random.binomial(n=1, p=self.player_class.growth_defense)
+
+    def level_enemy(self, level: int):
+        pass
 
 
