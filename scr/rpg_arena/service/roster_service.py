@@ -1,4 +1,4 @@
-from rpg_arena.service.data.class_data import base_classes
+from rpg_arena.entity.unit_class import UnitClass
 from rpg_arena.entity.fighter import Fighter
 from rpg_arena.service.data.names import fighter_names
 import random
@@ -7,9 +7,6 @@ class RosterService:
     def __init__(self, root_service: "RootService"):
         self.root_service = root_service
 
-    def generate_base_unit(self, unit_class: str):
-        new_fighter = Fighter(base_classes[unit_class])
-        return new_fighter
 
     def modify_unit_values(self, unit: "Fighter", is_enemy: bool):
         for attr, value in vars(unit.player_class).items():
@@ -29,10 +26,8 @@ class RosterService:
         return unit
 
     def generate_random_unit(self, is_enemy: bool):
-        class_names = list(base_classes.keys())
-        random_class_name = random.choice(class_names)
-
-        new_fighter = self.generate_base_unit(random_class_name)
+        random_class = random.choice(list(UnitClass))
+        new_fighter = Fighter(random_class)
         new_fighter = self.modify_unit_values(new_fighter, is_enemy)
 
         return new_fighter

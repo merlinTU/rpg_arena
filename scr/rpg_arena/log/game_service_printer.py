@@ -45,4 +45,4 @@ class GameServicePrinter():
                 f"Lv: {unit.level} / "
                 f"Gold: {unit.strength} / "
             )
-        print(f"{unit.name} ({unit.player_class.name}): {stats}")
+        print(f"{unit.name} ({unit.player_class.value}): {stats}")
