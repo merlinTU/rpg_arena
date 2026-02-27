@@ -7,14 +7,23 @@ class Fighter:
         self.player_class = player_class
         self.level = 1
 
-        self.hp = player_class.base_hp
-        self.strength = player_class.base_str
-        self.magic = player_class.base_magic
-        self.skill = player_class.base_skill
-        self.speed = player_class.base_speed
-        self.luck = player_class.base_luck
-        self.defense = player_class.base_defense
-        self.res = player_class.base_res
+        self.hp = 0
+        self.strength = 0
+        self.magic = 0
+        self.skill = 0
+        self.speed = 0
+        self.luck = 0
+        self.defense = 0
+        self.res = 0
+
+        self.hp_growth = 0
+        self.strength_growth = 0
+        self.magic_growth = 0
+        self.skill_growth = 0
+        self.speed_growth = 0
+        self.luck_growth = 0
+        self.defense_growth = 0
+        self.res_growth = 0
 
     def level_up(self):
         self.level += 1
@@ -27,6 +36,22 @@ class Fighter:
         self.defense += np.random.binomial(n=1, p=self.player_class.growth_defense)
 
     def level_enemy(self, level: int):
-        pass
+        for _ in range(level):
+            self.level += 1
+            self.hp += self.hp_growth
+            self.strength += self.strength_growth
+            self.magic += self.magic_growth
+            self.skill += self.skill_growth
+            self.speed += self.speed_growth
+            self.luck += self.luck_growth
+            self.defense += self.defense_growth
+            self.res_growth += self.res_growth
 
-
+        self.hp = int(self.hp)
+        self.strength = int(self.strength)
+        self.magic = int(self.magic)
+        self.skill = int(self.skill)
+        self.speed = int(self.speed)
+        self.luck = int(self.luck)
+        self.defense = int(self.defense)
+        self.res_growth = int(self.res_growth)

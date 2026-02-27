@@ -13,13 +13,24 @@ class GameServicePrinter():
         self.root_service.current_game.player = player_unit
         self.root_service.game_service.start_first_round()
 
+    def print_after_start_frist_round(self, enemy_units):
+        print("=== You enter the Arena ===\n")
+        print("=== Infront of you stand 3 Gladiors ===\n")
+
+        self.print_enemy_units(enemy_units)
+
+    def print_enemy_units(self, enemy_units):
+        for unit in enemy_units:
+            self.print_unit_stats(unit, is_not_enemy=False)
+
 
     def print_initial_units(self, initial_units):
         for unit in initial_units:
             self.print_unit_stats(unit)
 
-    def print_unit_stats(self, unit):
-        stats = (
+    def print_unit_stats(self, unit, is_not_enemy = True):
+        if is_not_enemy:
+            stats = (
             f"HP: {unit.hp} / "
             f"Str: {unit.strength} / "
             f"Mag: {unit.magic} / "
@@ -28,5 +39,10 @@ class GameServicePrinter():
             f"Luck: {unit.luck} / "
             f"Def: {unit.defense} / "
             f"Res: {unit.res}"
-        )
+            )
+        else:
+            stats = (
+                f"Lv: {unit.level} / "
+                f"Gold: {unit.strength} / "
+            )
         print(f"{unit.name} ({unit.player_class.name}): {stats}")

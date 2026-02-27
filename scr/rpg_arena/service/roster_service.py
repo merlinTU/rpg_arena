@@ -45,7 +45,7 @@ class RosterService:
         return units
 
     def generate_enemy_units(self):
-        units = [self.generate_random_unit(is_enemy=True) for _ in range(5)]
+        units = [self.generate_random_unit(is_enemy=True) for _ in range(3)]
         for i in range(1,3):
             self.level_enemy_unit(units[i], i)
         return units

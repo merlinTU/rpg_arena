@@ -14,4 +14,5 @@ class GameService:
         self.printer.print_after_start_game(initial_units)
 
     def start_first_round(self):
-        pass
+        enemy_units = self.root_service.roster_service.generate_enemy_units()
+        self.printer.print_after_start_frist_round(enemy_units)
