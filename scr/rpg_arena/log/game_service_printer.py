@@ -18,6 +18,9 @@ class GameServicePrinter():
         print("=== Infront of you stand 3 Gladiors ===\n")
 
         self.print_enemy_units(enemy_units)
+        enemy_unit = self.root_service.player_action_service.choose_enemy(enemy_units)
+        self.root_service.arena_service.start_arena(enemy_unit)
+
 
     def print_enemy_units(self, enemy_units):
         for unit in enemy_units:
@@ -43,6 +46,6 @@ class GameServicePrinter():
         else:
             stats = (
                 f"Lv: {unit.level} / "
-                f"Gold: {unit.strength} / "
+                f"Gold: {unit.gold} / "
             )
         print(f"{unit.name} ({unit.player_class.value}): {stats}")
