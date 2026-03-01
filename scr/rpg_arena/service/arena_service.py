@@ -47,6 +47,8 @@ class ArenaService:
         loser = enemy_unit if player_unit.hp > 0 else player_unit
         self.printer.print_after_arena_simulation(winner, loser)
 
+        self.root_service.camp_service.open_camp()
+
     def make_arena_round(self, first_unit: "Fighter", second_unit: "Fighter"):
         self.printer.print_at_start_round(first_unit)
 

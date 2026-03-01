@@ -23,31 +23,39 @@ class GameServicePrinter():
 
 
     def print_enemy_units(self, enemy_units):
+        i = 0
         for unit in enemy_units:
-            self.print_unit_stats(unit, is_not_enemy=False)
+            self.print_unit_stats(unit, i,  is_not_enemy=False)
+            i += 1
 
 
     def print_initial_units(self, initial_units):
+        i = 0
         for unit in initial_units:
-            self.print_unit_stats(unit)
+            self.print_unit_stats(unit, i)
+            i += 1
 
-    def print_unit_stats(self, unit, is_not_enemy = True):
+    def print_unit_stats(self, unit, number: int, is_not_enemy=True):
+        print("----------------------------------------")
+
         if is_not_enemy:
             stats = (
-            f"HP: {unit.hp} / "
-            f"Str: {unit.strength} / "
-            f"Mag: {unit.magic} / "
-            f"Skill: {unit.skill} / "
-            f"Spd: {unit.speed} / "
-            f"Luck: {unit.luck} / "
-            f"Def: {unit.defense} / "
-            f"Res: {unit.res} / "
-            f"Weapon: {unit.weapons[0].name} / "
+                f"HP: {unit.hp} / "
+                f"Str: {unit.strength} / "
+                f"Mag: {unit.magic} / "
+                f"Skill: {unit.skill} / "
+                f"Spd: {unit.speed} / "
+                f"Luck: {unit.luck} / "
+                f"Def: {unit.defense} / "
+                f"Res: {unit.res} / "
+                f"Weapon: {unit.weapons[0].name}"
             )
         else:
             stats = (
                 f"Lv: {unit.level} / "
                 f"Gold: {unit.gold} / "
-                f"Weapon: {unit.weapons[0].name} / "
+                f"Weapon: {unit.weapons[0].name}"
             )
-        print(f"{unit.name} ({unit.player_class.value}): {stats}")
+
+        print(f"{number}) {unit.name} ({unit.player_class.value})")
+        print(stats)
