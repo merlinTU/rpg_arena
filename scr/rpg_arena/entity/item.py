@@ -5,4 +5,4 @@ class Item:
         self.price = price
 
     def __str__(self):
-        return f"{self.name} (Item)"
+        return f"{self.name}"

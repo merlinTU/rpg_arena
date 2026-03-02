@@ -1,45 +1,35 @@
 from rpg_arena.entity.weapon_type import WeaponType
 from rpg_arena.log.arnea_service_printer import ArneaServicePrinter
+from rpg_arena.service.arena_action_service import ArenaActionService
 import random
+
 
 class ArenaService:
     def __init__(self, root_service: "RootService"):
         self.root_service = root_service
         self.printer = ArneaServicePrinter(root_service)
+        self.action_service = ArenaActionService(root_service)
+
+        self.enemy: "Fighter" = None
+        self.continue_fight = True
 
     def start_arena(self, enemy: "Fighter"):
+        self.enemy = enemy
         self.arena_simulation(self.root_service.current_game.player, enemy)
 
-    def caluclate_hit_chance(self, attacker: "Fighter", defender: "Fighter"):
-        hit_chance = max(0, min(100, attacker.calc_hit() - defender.calc_avoid()))
-        return hit_chance / 100
-
-    def caluclate_crit_chance(self, attacker: "Fighter", defender: "Fighter"):
-        crit_chance = max(0, min(100, attacker.calc_crit() - defender.calc_crit_avoid()))
-        return crit_chance / 100
-
-    def calculate_damage(self, attacker: "Fighter", defender: "Fighter"):
-        weapon = attacker.items[0]
-        if weapon.weapon_type == WeaponType.MAGIC:
-            return max(0, weapon.strength + attacker.magic - defender.res)
-        else:
-            return max(0, weapon.strength + attacker.strength - defender.defense)
-
     def arena_simulation(self, player_unit: "Fighter", enemy_unit: "Fighter"):
-        player_initiative = player_unit.speed + player_unit.skill
-        enemy_initiative = enemy_unit.speed + enemy_unit.skill
+        self.printer.print_at_start_round()
 
-        if player_initiative > enemy_initiative:
-            attacker = player_unit
-            defender = enemy_unit
-        else:
-            attacker = enemy_unit
-            defender = player_unit
+        attacker, defender = player_unit, enemy_unit
 
-        while True:
-            fight_res = self.make_arena_round(attacker, defender)
-            if fight_res == -1:
-                break
+        self.printer.print_after_start_round(attacker, defender)
+
+        while self.continue_fight:
+            if attacker == player_unit:
+                self.action_service.make_player_round_decision()
+            else:
+                self.action_service.make_enemy_round_decision()
+
             # next fighters turn
             attacker, defender = defender, attacker
 
@@ -49,17 +39,16 @@ class ArenaService:
 
         self.root_service.camp_service.open_camp()
 
-    def make_arena_round(self, first_unit: "Fighter", second_unit: "Fighter"):
-        self.printer.print_at_start_round(first_unit)
+    def make_fight_round(self, first_unit: "Fighter", second_unit: "Fighter"):
 
         self.make_attack(first_unit, second_unit, 1)
         if second_unit.hp > 0:
             self.make_attack(second_unit, first_unit, 3)
         else:
-            return -1
+            return self.end_fight()
 
         if first_unit.hp == 0:
-            return -1
+            return self.end_fight()
 
         if first_unit.speed > second_unit.speed + 5:
             self.make_attack(first_unit, second_unit, 2)
@@ -67,10 +56,13 @@ class ArenaService:
             self.make_attack(second_unit, first_unit, 2)
 
         if first_unit.hp == 0 or second_unit.hp == 0:
-            return -1
+            return self.end_fight()
 
         self.printer.print_after_start_round(first_unit, second_unit)
         return 1
+
+    def end_fight(self):
+        self.continue_fight = False
 
     def make_attack(self, attacker: "Fighter", defender: "Fighter", status: int):
         hit_chance = self.caluclate_hit_chance(attacker, defender)
@@ -93,4 +85,20 @@ class ArenaService:
         attacker.items[0].uses -= 1
 
         self.printer.print_after_make_attack(attacker, defender, has_hit, has_crit, damage, status)
+
+
+    def caluclate_hit_chance(self, attacker: "Fighter", defender: "Fighter"):
+        hit_chance = max(0, min(100, attacker.calc_hit() - defender.calc_avoid()))
+        return hit_chance / 100
+
+    def caluclate_crit_chance(self, attacker: "Fighter", defender: "Fighter"):
+        crit_chance = max(0, min(100, attacker.calc_crit() - defender.calc_crit_avoid()))
+        return crit_chance / 100
+
+    def calculate_damage(self, attacker: "Fighter", defender: "Fighter"):
+        weapon = attacker.items[0]
+        if weapon.weapon_type == WeaponType.MAGIC:
+            return max(0, weapon.strength + attacker.magic - defender.res)
+        else:
+            return max(0, weapon.strength + attacker.strength - defender.defense)
 
