@@ -54,7 +54,7 @@ class RosterService:
         names = random.sample(fighter_names, 3)
         for i in range(0,3):
             self.level_enemy_unit(units[i], i)
-            units[i].name = names[i]
+            units[i].name = "Gladiator"
         return units
 
     def level_enemy_unit(self, unit: Fighter, strength: int):
