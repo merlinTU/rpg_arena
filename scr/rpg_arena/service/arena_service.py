@@ -31,14 +31,18 @@ class ArenaService:
                 self.action_service.make_enemy_round_decision()
 
             # next fighters turn
-            attacker, defender = defender, attacker
-            self.printer.print_after_start_round(attacker, defender)
+            if self.continue_fight:
+                attacker, defender = defender, attacker
+                self.printer.print_after_start_round(attacker, defender)
 
         winner = player_unit if player_unit.hp > 0 else enemy_unit
         loser = enemy_unit if player_unit.hp > 0 else player_unit
         self.printer.print_after_arena_simulation(winner, loser)
 
-        self.root_service.camp_service.open_camp()
+        if winner == player_unit:
+            self.root_service.camp_service.open_camp()
+        else:
+            return
 
     def make_fight_round(self, first_unit: "Fighter", second_unit: "Fighter"):
 

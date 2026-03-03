@@ -6,3 +6,6 @@ class Item:
 
     def __str__(self):
         return f"{self.name}"
+
+    def use(self, player_unit: "Fighter"):
+        pass

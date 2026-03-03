@@ -56,17 +56,21 @@ class ArneaServicePrinter():
         print("========================================")
 
     def print_after_arena_simulation(self, winner, loser):
-        print("Fight over")
+        print("\n================ FIGHT OVER ================\n")
+        time.sleep(1)
+
         if winner != self.root_service.current_game.player:
-            print("You were defeated")
+            print("You have been defeated!")
+            time.sleep(1)
             print("GAME OVER")
             return
 
-        print(loser.name, "falls to the ground")
+        print(f"{loser.name} falls to the ground...")
         time.sleep(1)
-        print(loser.name, "is defeated")
-        time.sleep(3)
-        print("You win!")
+        print(f"{loser.name} is defeated!")
+        time.sleep(2)
+        print("\n================ YOU WIN! =================\n")
+        time.sleep(2)
 
     def print_at_open_fight_menu(self):
         """
@@ -154,5 +158,43 @@ class ArneaServicePrinter():
         print("What do you want to do?")
         print("1) Attack")
         print("2) Check Inventory")
+        print("3) Surrender")
+        print("========================================\n")
+
+    def print_inventory(self):
+        player_unit = self.root_service.current_game.player
+
+        print("\n====== Your Inventory ======\n")
+
+        # mark equipped weapon
+        if player_unit.equipped_weapon:
+            print("Equipped Weapon:")
+            print(f"---- {player_unit.equipped_weapon}")
+            print("--------------------------------\n")
+
+        # other items in inventory
+        other_items = [item for item in player_unit.items if item != player_unit.equipped_weapon]
+
+        if not other_items:
+            print("No other items in inventory.")
+            print("\n============================\n")
+            self.print_inventar_choice()
+            return
+
+        for index, item in enumerate(other_items, start=1):
+            print(f"{index}) {item}")
+
+        print("============================\n")
+
+        self.print_inventar_choice()
+
+    def print_inventar_choice(self):
+        time.sleep(1)
+        print("What do you want to do?")
+        print("1) Equip Weapon")
+        print("2) Use Item")
         print("3) Cancel")
         print("========================================\n")
+
+    def print_after_use_item(self, unit: "Fighter"):
+        print(">", unit.name, "used item")
