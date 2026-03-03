@@ -1,7 +1,7 @@
 from rpg_arena.entity.unit_class import UnitClass
 from rpg_arena.entity.fighter import Fighter
 from rpg_arena.service.data.names import fighter_names, enemy_names
-from rpg_arena.service.data.weapon_data import WEAPONS, CLASS_WEAPON_MAP
+from rpg_arena.service.data.weapon_data import WEAPONS, CLASS_WEAPON_MAP, WEAK_WEAPONS, STRONG_WEAPONS, MEDIUM_WEAPONS
 import random
 
 class RosterService:
@@ -92,20 +92,39 @@ class RosterService:
         new_fighter = Fighter(random_class)
         new_fighter = self.modify_unit_values(new_fighter, type_)
 
-        random_weapon = self.random_weapon(random_class)
+        random_weapon = self.random_weapon(random_class, type_)
         new_fighter.items.append(random_weapon)
         new_fighter.equipped_weapon = random_weapon
 
         return new_fighter
 
-    def random_weapon(self, unit_class: "Class"):
+    def random_weapon(self, unit_class: "Class", type_: int):
+        round_ = self.root_service.current_game.round
         allowed_types = CLASS_WEAPON_MAP[unit_class]
 
         possible_weapons = [
             w for w in WEAPONS.values() if w.weapon_type in allowed_types
         ]
 
-        return random.choice(possible_weapons)
+        match type_:
+            case 1:
+                modificator = round_
+            case 2:
+                modificator = round_ * 2
+            case 3:
+                modificator = round_ * 0.25
+            case _:
+                modificator = round_
+
+        if random.random() < 0.05 * modificator:
+            weapons = [w for w in possible_weapons if w in STRONG_WEAPONS]
+
+        elif random.random() < 0.25 * modificator:
+            weapons = [w for w in possible_weapons if w in MEDIUM_WEAPONS]
+        else:
+            weapons = [w for w in possible_weapons if w in WEAK_WEAPONS]
+
+        return random.choice(weapons)
 
     def generate_initial_units(self):
         units = [self.generate_random_unit(1) for _ in range(5)]
