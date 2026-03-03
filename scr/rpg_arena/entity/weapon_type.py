@@ -5,3 +5,4 @@ class WeaponType(Enum):
     AXE = auto()
     BOW = auto()
     MAGIC = auto()
+    LANCE = auto()

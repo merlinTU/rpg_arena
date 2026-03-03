@@ -1,3 +1,5 @@
+from distutils.command.check import check
+
 from rpg_arena.entity.weapon_type import WeaponType
 from rpg_arena.log.arnea_service_printer import ArneaServicePrinter
 from rpg_arena.service.arena_action_service import ArenaActionService
@@ -92,8 +94,41 @@ class ArenaService:
 
 
     def caluclate_hit_chance(self, attacker: "Fighter", defender: "Fighter"):
-        hit_chance = max(0, min(100, attacker.calc_hit() - defender.calc_avoid()))
+
+        hit_chance = attacker.calc_hit() - defender.calc_avoid()
+
+        match self.check_weapon_vantage(attacker.equipped_weapon, defender.equipped_weapon):
+            case 1:
+                hit_chance += 20
+            case 2:
+                hit_chance -= 20
+            case 3:
+                pass
+
+        hit_chance = max(0, min(100, hit_chance))
         return hit_chance / 100
+
+    def check_weapon_vantage(self, attacker_weapon, defender_weapon):
+
+        weapon_triangle = {
+            WeaponType.SWORD: WeaponType.AXE,
+            WeaponType.AXE: WeaponType.LANCE,
+            WeaponType.LANCE: WeaponType.SWORD,
+            WeaponType.BOW : None,
+            WeaponType.MAGIC: None
+        }
+
+        attacker = attacker_weapon.weapon_type
+        defender = defender_weapon.weapon_type
+
+        if weapon_triangle.get(attacker) == defender:
+            return 1
+
+        elif weapon_triangle.get(defender) == attacker:
+            return 2
+
+        else:
+            return 3
 
     def caluclate_crit_chance(self, attacker: "Fighter", defender: "Fighter"):
         crit_chance = max(0, min(100, attacker.calc_crit() - defender.calc_crit_avoid()))
