@@ -2,6 +2,7 @@ from rpg_arena.entity.unit_class import UnitClass
 from rpg_arena.entity.fighter import Fighter
 from rpg_arena.service.data.names import fighter_names, enemy_names
 from rpg_arena.service.data.weapon_data import WEAPONS, CLASS_WEAPON_MAP, WEAK_WEAPONS, STRONG_WEAPONS, MEDIUM_WEAPONS
+from rpg_arena.service.data.item_data import NORMAL_ITEMS, RARE_ITEMS
 import random
 
 class RosterService:
@@ -124,13 +125,29 @@ class RosterService:
         else:
             weapons = [w for w in possible_weapons if w in WEAK_WEAPONS]
 
-        return random.choice(weapons)
+        return random.choice(weapons).copy()
+
+    def random_item(self):
+        if random.random() < 0.05:
+            item = random.choice(RARE_ITEMS)
+        else:
+            item = random.choice(NORMAL_ITEMS)
+
+        return item.copy()
 
     def generate_initial_units(self):
         units = [self.generate_random_unit(1) for _ in range(5)]
         names = random.sample(fighter_names, 5)
+
         for i in range(0,5):
             units[i].name = names[i]
+
+            if random.random() < 0.15:
+                units[i].items.append(self.random_weapon(units[i].player_class, type_= 1))
+            if random.random() < 0.15:
+                units[i].items.append(self.random_item())
+            if random.random() < 0.5:
+                units[i].items.append(self.random_item())
         return units
 
     def generate_enemy_units(self):

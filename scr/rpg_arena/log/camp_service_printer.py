@@ -49,7 +49,7 @@ class CampServicePrinter:
         else:
             print("Convoy is empty.")
         time.sleep(1)
-        print("\n----------------------------------------")
+        print("----------------------------------------")
         print("Commands:")
         print(" send <no>   - Move item from Inventory to Convoy")
         print(" take <no>   - Move item from Convoy to Inventory")

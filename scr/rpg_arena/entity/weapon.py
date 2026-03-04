@@ -12,8 +12,28 @@ class Weapon(Item):
         self.crit = crit
         self.weight = weight
 
+    def copy(self):
+        """Return a new Weapon instance with the same stats."""
+        return Weapon(
+            name=self.name,
+            weapon_type=self.weapon_type,
+            strength=self.strength,
+            accuracy=self.accuracy,
+            uses=self.uses,
+            crit=self.crit,
+            weight=self.weight,
+            price=self.price
+        )
+
     def __str__(self):
-        return (f"{self.name} ({self.weapon_type.name}) / "
-                f"STR: {self.strength} / ACC: {self.accuracy} / "
-                f"CRIT: {self.crit} / WEIGHT: {self.weight} / "
-                f"USES: {self.uses}")
+        name_width = 15
+        stat_width = 6
+        lines = []
+        lines.append("-" * 40)
+        lines.append(f"{self.name:<{name_width}} ({self.weapon_type.name})")
+        lines.append(
+            f"Stats: STR: {self.strength:>{stat_width}} | ACC: {self.accuracy:>{stat_width}} | "
+            f"CRIT: {self.crit:>{stat_width}} | WEIGHT: {self.weight:>{stat_width}} | USES: {self.uses:>{stat_width}}"
+        )
+        lines.append("-" * 40)
+        return "\n".join(lines)

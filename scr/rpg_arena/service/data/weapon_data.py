@@ -10,7 +10,7 @@ iron_sword = Weapon(
     accuracy=100,
     uses=40,
     crit=5,
-    weight=5.0,
+    weight=5,
     price=100
 )
 

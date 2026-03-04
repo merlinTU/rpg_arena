@@ -81,7 +81,7 @@ class CampActionService:
                         print("Item not usable.")
                         continue
 
-                    item.use(player)
+                    item.use(player, game)
                     self.root_service.camp_service.open_item_manager()
                     break
 
