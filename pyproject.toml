@@ -13,4 +13,4 @@ dependencies = [
 ]
 
 [project.scripts]
-rpg-arena = "rpg_arena.main:start_game"
+rpg_arena = "rpg_arena.main:start_game"
