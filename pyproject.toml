@@ -16,3 +16,8 @@ dependencies = [
 rpg_arena = "rpg_arena:start_game"
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[dependency-groups]
+dev = [
+    "sphinx>=7.0.0",
+]
