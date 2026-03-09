@@ -3,15 +3,37 @@ import time
 from rpg_arena.entity import Weapon
 
 
-class ArneaServicePrinter():
+class ArneaServicePrinter:
+    """
+    Printer class for the Arena Service.
+    Handles all combat-related console outputs such as attack results,
+    battle start/end notifications, weapon selection, and inventory display.
+    """
+
     def __init__(self, root_service: "RootService"):
+        """
+        Initialize the printer with a reference to the root service.
+
+        Args:
+            root_service: Reference to RootService for accessing current game state.
+        """
         self.root_service = root_service
 
     def print_after_make_attack(self, attacker, defender, has_hit, has_crit, damage, status):
+        """
+        Prints the result of a single attack in the arena.
+
+        Args:
+            attacker: The attacking fighter.
+            defender: The defending fighter.
+            has_hit: Boolean, True if the attack hits.
+            has_crit: Boolean, True if the attack is a critical hit.
+            damage: Damage dealt by the attack.
+            status: Attack type/status (1 = normal, 2 = double, 3 = counter).
+        """
         attacker_name = attacker.name
         defender_name = defender.name
 
-        # Action Line
         match status:
             case 1:
                 print(f"> {attacker_name} attacks!")
@@ -22,7 +44,6 @@ class ArneaServicePrinter():
 
         time.sleep(1)
 
-        # Result
         if has_hit:
             if has_crit:
                 print(">>> CRITICAL HIT! <<<")
@@ -37,25 +58,36 @@ class ArneaServicePrinter():
             print(f"> {defender_name} dodged the attack!")
             time.sleep(2)
 
-
     def print_at_start_round(self):
+        """Prints the header for the start of a battle round."""
         print("\n========================================")
         print("        BATTLE START")
         print("========================================")
         time.sleep(1)
 
-
     def print_after_start_round(self, first_unit, second_unit):
-        print("\n========================================")
+        """
+        Prints whose turn it is at the start of a round.
 
+        Args:
+            first_unit: Fighter whose turn it is.
+            second_unit: Opponent fighter.
+        """
+        print("\n========================================")
         if first_unit == self.root_service.current_game.player:
             print("        YOUR TURN")
         else:
             print("        ENEMY TURN")
-
         print("========================================")
 
     def print_after_arena_simulation(self, winner, loser):
+        """
+        Prints the result of the battle after a fight ends.
+
+        Args:
+            winner: Fighter who won.
+            loser: Fighter who lost.
+        """
         print("\n================ FIGHT OVER ================\n")
         time.sleep(1)
 
@@ -74,8 +106,7 @@ class ArneaServicePrinter():
 
     def print_at_open_fight_menu(self):
         """
-        Prints all weapons in the player's items in a formatted, numbered box
-        so the player can choose which weapon to use.
+        Prints the player's available weapons for selection in a formatted, numbered list.
         """
         items = self.root_service.current_game.player.items
         weapons = [item for item in items if isinstance(item, Weapon)]
@@ -89,17 +120,30 @@ class ArneaServicePrinter():
             print("========================================")
             return
 
-        # Print numbered list of weapons
         for index, weapon in enumerate(weapons, start=1):
             print(f"{index}) {weapon}")
 
         print("========================================")
 
     def print_fight_preview(self):
+        """
+        Prints a detailed fight preview between the player and the enemy.
+
+        This method calculates and displays:
+            - Hit chance, critical chance, and damage for both units
+            - Whether a unit attacks twice (based on speed difference)
+            - Weapon advantage indicators (↑ or ↓)
+            - Formatted display of stats including HP, Hit, Damage, Crit, and weapon
+
+        The preview helps the player make tactical decisions before committing to an attack.
+
+        No parameters; uses current game state from root_service.
+        """
         player_unit = self.root_service.current_game.player
         enemy_unit = self.root_service.arena_service.enemy
         arena = self.root_service.arena_service
 
+        # Calculate combat stats for preview
         player_hit = arena.caluclate_hit_chance(player_unit, enemy_unit)
         player_crit = arena.caluclate_crit_chance(player_unit, enemy_unit)
         player_damage = arena.calculate_damage(player_unit, enemy_unit)
@@ -108,9 +152,11 @@ class ArneaServicePrinter():
         enemy_crit = arena.caluclate_crit_chance(enemy_unit, player_unit)
         enemy_damage = arena.calculate_damage(enemy_unit, player_unit)
 
+        # Determine double attack eligibility
         player_double = player_unit.calc_corrected_speed() > enemy_unit.calc_corrected_speed() + 5
         enemy_double = enemy_unit.calc_corrected_speed() > player_unit.calc_corrected_speed() + 5
 
+        # Determine weapon advantage arrows
         player_weapon_arrow = ""
         enemy_weapon_arrow = ""
         vantage_player = arena.check_weapon_vantage(player_unit.equipped_weapon, enemy_unit.equipped_weapon)
@@ -125,6 +171,7 @@ class ArneaServicePrinter():
         elif vantage_enemy == 2:
             enemy_weapon_arrow = " ↓"
 
+        # Print formatted fight preview
         print("\n========================================")
         print("           FIGHT PREVIEW")
         print("========================================")
@@ -134,7 +181,7 @@ class ArneaServicePrinter():
         stat_width = 6
         weapon_width = 15
 
-        # Player
+        # Player info
         player_weapon_str = f"{player_unit.equipped_weapon.name:<{weapon_width - 1}}{player_weapon_arrow:>1}"
         player_info = (
             f"1) {player_unit.name:<{name_width}} | "
@@ -148,7 +195,7 @@ class ArneaServicePrinter():
             player_info += "  x2"
         print(player_info)
 
-        # Enemy
+        # Enemy info
         enemy_weapon_str = f"{enemy_unit.equipped_weapon.name:<{weapon_width - 1}}{enemy_weapon_arrow:>1}"
         enemy_info = (
             f"2) {enemy_unit.name:<{name_width}} | "
@@ -164,8 +211,17 @@ class ArneaServicePrinter():
 
         print("========================================")
 
-
     def print_after_print_fight_preview(self):
+        """
+        Prints the menu options for the player after viewing the fight preview.
+
+        Options presented:
+            1) Attack
+            2) Choose another weapon
+            3) Cancel
+
+        No parameters; intended to guide the player's next action.
+        """
         print("What do you want to do?")
         print("1) Attack")
         print("2) Choose another weapon")
@@ -173,6 +229,17 @@ class ArneaServicePrinter():
         print("========================================\n")
 
     def print_at_make_player_round_decsion(self):
+        """
+        Prints the main menu for the player at the start of their round.
+
+        Options presented:
+            1) Attack
+            2) Check Inventory
+            3) Wait
+            4) Surrender
+
+        No parameters; intended to guide the player's choice for the round.
+        """
         print("What do you want to do?")
         print("1) Attack")
         print("2) Check Inventory")
@@ -181,6 +248,15 @@ class ArneaServicePrinter():
         print("========================================\n")
 
     def print_inventory(self):
+        """
+        Prints the player's current inventory in a formatted view.
+
+        - Shows the equipped weapon at the top.
+        - Lists all other items in the inventory.
+        - Calls `print_inventar_choice` at the end to show available commands.
+
+        Uses the current game state from `root_service`.
+        """
         player_unit = self.root_service.current_game.player
 
         print("\n====== Your Inventory ======\n")
@@ -208,6 +284,14 @@ class ArneaServicePrinter():
         self.print_inventar_choice()
 
     def print_inventar_choice(self):
+        """
+        Prints available commands for interacting with the inventory.
+
+        Options:
+            - equip <no>: Equip a weapon
+            - use <no>: Use an item
+            - exit: Exit inventory
+        """
         time.sleep(1)
         print("What do you want to do?")
         print("equip <no>   - Equip weapon")
@@ -216,9 +300,24 @@ class ArneaServicePrinter():
         print("========================================\n")
 
     def print_after_use_item(self, unit: "Fighter"):
+        """
+        Prints a confirmation message that a unit has used an item.
+
+        Args:
+            unit (Fighter): The unit that used the item.
+        """
         print(">", unit.name, "used item")
 
     def print_at_end_fight(self, gold: int, exp: int):
+        """
+        Prints the battle results at the end of a fight.
+
+        Displays the amount of gold earned and experience gained.
+
+        Args:
+            gold (int): Amount of gold earned by the player.
+            exp (int): Amount of experience gained by the player.
+        """
         print("========================================")
         print("           BATTLE RESULTS")
         print("========================================")
@@ -228,10 +327,15 @@ class ArneaServicePrinter():
         print(f"You gained {exp} EXP.")
         time.sleep(1)
 
-
-
     def print_level_up(self, level_up_stats: list):
+        """
+        Prints a level-up message for the player and lists which stats increased.
 
+        If no stats increased, prints a message indicating no level-up occurred.
+
+        Args:
+            level_up_stats (list): List of stat names that increased.
+        """
         if level_up_stats:
             print("LEVEL UP! The following stats increased:")
             for stat in level_up_stats:
@@ -242,6 +346,12 @@ class ArneaServicePrinter():
         time.sleep(1)
 
     def print_after_surrender(self):
+        """
+        Prints a message and battle results when the player surrenders.
+
+        - Displays that the player surrendered.
+        - Shows 0 Gold and 0 EXP earned.
+        """
         player_unit = self.root_service.current_game.player
         print(">", player_unit.name, "surrendered.")
 
@@ -253,4 +363,3 @@ class ArneaServicePrinter():
         time.sleep(1)
         print(f"You gained 0 EXP.")
         time.sleep(1)
-

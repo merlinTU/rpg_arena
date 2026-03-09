@@ -1,3 +1,9 @@
+"""
+Name data for RPG Arena.
+
+Contains lists of names used for generating player units and enemy units.
+These names are randomly assigned to units when creating the roster.
+"""
 fighter_names = [
     "Arthas", "Merlin", "Draven", "Lyra", "Kael", "Thorin", "Sylas", "Elara",
     "Gideon", "Ragnar", "Valeria", "Caspian", "Isolde", "Fenrir", "Aurora",
@@ -10,10 +16,7 @@ fighter_names = [
     "Theron", "Marcellus", "Nyssa", "Kaelen", "Valkyr", "Orla", "Lucinda",
     "Drystan", "Rhiannon", "Magnus", "Isolde", "Corwin", "Vespera", "Althea",
     "Ragnarok", "Zephyr", "Celandine", "Dusk", "Aurelius", "Mirella", "Jovian",
-    "Sylph", "Cassian", "Thessaly", "Nymeria", "Odin", "Elysium", "Kaelis", "Seren"
-]
-
-enemy_names = [
+    "Sylph", "Cassian", "Thessaly", "Nymeria", "Odin", "Elysium", "Kaelis", "Seren",
     "Guntar", "Borg", "Hulm", "Dargo", "Morth", "Jarne", "Varg", "Bodo", "Kuno",
     "Grimm", "Hilda", "Bruna", "Fenja", "Helma", "Suna", "Kara", "Ylva", "Runa",
     "Tilda", "Juna", "Krag", "Thokk", "Grom", "Murk", "Ursa", "Grish", "Dran",

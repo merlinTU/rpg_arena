@@ -1,8 +1,28 @@
 class ShopActionService:
+    """
+    Handles all player interactions and decisions inside the shop.
+
+    Attributes:
+        root_service (RootService): Reference to the central RootService, allowing access to all services.
+
+    """
+
     def __init__(self, root_service: "RootService"):
+        """
+        Initialize ShopActionService with a reference to RootService.
+
+        Args:
+            root_service (RootService): Central service managing all sub-services.
+        """
         self.root_service = root_service
 
     def choose_shop_action(self):
+        """
+        Prompt the player to choose an action in the shop.
+
+        Returns:
+            None
+        """
         while True:
             choice = input(">> Choose an option (1-3): ")
 
@@ -28,9 +48,15 @@ class ShopActionService:
                     self.root_service.camp_service.open_camp()
                     break
                 case _:
-                    print("Invalid option. Please choose between 1-4.")
+                    print("Invalid option. Please choose between 1-3.")
 
     def make_buy_items_decision(self):
+        """
+        Handle player input for buying items from the shop.
+
+        Returns:
+            None
+        """
         game = self.root_service.current_game
         player = game.player
         items = self.root_service.shop_service.shop_items
@@ -74,9 +100,15 @@ class ShopActionService:
                     continue
 
                 case _:
-                    print("Unknown command. Use send, take, use or exit.")
+                    print("Unknown command. Use: buy or exit.")
 
     def make_send_to_convoy_decision(self):
+        """
+        Handle player decision to send an item to the convoy when inventory is full.
+
+        Returns:
+            None
+        """
         player = self.root_service.current_game.player
         while True:
             choice = input(">> Choose an option: ")
@@ -96,10 +128,15 @@ class ShopActionService:
             # send item to convoy
             game = self.root_service.current_game
             game.convoy.append(player.items.pop(choice - 1))
-
             break
 
     def make_sell_items_decision(self):
+        """
+        Handle player input for selling items.
+
+        Returns:
+            None
+        """
         game = self.root_service.current_game
         player = game.player
         items = self.root_service.shop_service.shop_items

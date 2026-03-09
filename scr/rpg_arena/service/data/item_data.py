@@ -1,7 +1,16 @@
+"""
+Item data for RPG Arena.
+
+Defines all purchasable and collectible items in the game,
+including healing potions and stat boosters. Items are categorized
+as normal or rare for shop generation and random loot.
+"""
+
 from rpg_arena.entity.healing_potion import HealingPotion
 from rpg_arena.entity.stat_booster import StatBooster
 
 
+# --- Healing Potions ---
 vulnerary = HealingPotion(
     name="Vulnerary",
     heal_amount=10,
@@ -23,6 +32,15 @@ hi_potion = HealingPotion(
     price=400
 )
 
+elixir = HealingPotion(
+    name="Elixir",
+    heal_amount=50,
+    uses=1,
+    price=1500
+)
+
+
+# --- Stat Boosters ---
 seraph_robe = StatBooster(
     name="Seraph Robe",
     status="HP",
@@ -42,14 +60,6 @@ luck_charm = StatBooster(
     status="LUCK",
     boost=3,
     price=1800
-)
-
-
-elixir = HealingPotion(
-    name="Elixir",
-    heal_amount=50,
-    uses=1,
-    price=1500
 )
 
 dracoshield = StatBooster(
@@ -88,14 +98,15 @@ speedwing = StatBooster(
 )
 
 
+# --- Dictionary of all items ---
 ITEMS = {
     "Vulnerary": vulnerary,
     "Concoction": concoction,
     "Hi-Potion": hi_potion,
+    "Elixir": elixir,
     "Seraph Robe": seraph_robe,
     "Secret Book": secret_book,
     "Luck Charm": luck_charm,
-    "Elixir": elixir,
     "Dracoshield": dracoshield,
     "Spirit Dust": spirit_dust,
     "Energy Ring": energy_ring,
@@ -103,7 +114,8 @@ ITEMS = {
     "Speedwing": speedwing
 }
 
-
+# --- Lists for shop / loot generation ---
+# Normal items are more common
 NORMAL_ITEMS = [
     vulnerary,
     concoction,
@@ -113,6 +125,7 @@ NORMAL_ITEMS = [
     luck_charm
 ]
 
+# Rare items are less common
 RARE_ITEMS = [
     elixir,
     dracoshield,

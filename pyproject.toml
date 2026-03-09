@@ -1,9 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "rpg-arena"
 version = "0.1.0"
-description = "Add your description here"
+description = "A turn-based RPG arena game in Python"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.4.2",
 ]
+
+[project.scripts]
+rpg-arena = "rpg_arena.main:start_game"

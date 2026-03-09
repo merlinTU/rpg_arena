@@ -1,10 +1,31 @@
-
-
 class CampActionService:
+    """
+    Service class responsible for handling player actions within the camp.
+
+    Attributes:
+        root_service (RootService): Reference to the root service managing all sub-services.
+
+    """
+
     def __init__(self, root_service: "RootService"):
+        """
+        Initialize the CampActionService with a reference to the root service.
+
+        Args:
+            root_service (RootService): Central service managing all other services.
+
+        Returns:
+            None
+        """
         self.root_service = root_service
 
     def choose_camp_action(self):
+        """
+        Prompt the player to choose an action from the camp menu.
+
+        Returns:
+            None
+        """
         while True:
             choice = input(">> Choose an option: ")
 
@@ -33,6 +54,12 @@ class CampActionService:
                     print("Invalid option. Please choose between 1-4.")
 
     def choose_item_manager_action(self):
+        """
+        Handle player commands for managing items in inventory and convoy.
+
+        Returns:
+            None
+        """
         game = self.root_service.current_game
         player = game.player
 
@@ -42,7 +69,7 @@ class CampActionService:
             if self.root_service.information_service.check_information_service_call(choice):
                 continue
 
-            if choice == "exit" or choice == "e":
+            if choice in ("exit", "e"):
                 self.root_service.camp_service.open_camp()
                 return
 

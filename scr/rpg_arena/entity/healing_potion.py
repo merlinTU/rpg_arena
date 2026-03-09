@@ -1,12 +1,49 @@
 from .item import Item
 
 class HealingPotion(Item):
+    """
+    Represents a consumable healing item that restores HP to a Fighter.
+
+    Attributes:
+        name (str): Name of the item (inherited from Item).
+        usable (bool): Whether the item is usable (always True for HealingPotion).
+        price (int): Price of the item (inherited from Item).
+        heal_amount (int): Amount of HP restored when used.
+        uses (int): Number of times the potion can be used.
+
+    Methods:
+        __str__(index=None): Returns a formatted string representation of the potion.
+        use(player_unit, game, in_convoy=False): Heals the player and updates inventory.
+        copy(): Returns a new HealingPotion instance with the same attributes.
+    """
+
     def __init__(self, name, heal_amount, uses, price):
+        """
+        Initialize a HealingPotion with a healing amount, number of uses, and price.
+
+        Args:
+            name (str): Name of the potion.
+            heal_amount (int): Amount of HP the potion restores.
+            uses (int): Number of times the potion can be used.
+            price (int): Price of the potion.
+
+        Returns:
+            None
+        """
         super().__init__(name, True, price)
         self.heal_amount = heal_amount
         self.uses = uses
 
-    def __str__(self, index = None):
+    def __str__(self, index=None):
+        """
+        Return a formatted string representation of the HealingPotion.
+
+        Args:
+            index (int | None, optional): Optional index to display before the item name.
+
+        Returns:
+            str: Formatted string showing name, remaining uses, and healing amount.
+        """
         name_width = 20
         value_width = 5
         index_str = f"{index}) " if index is not None else ""
@@ -22,7 +59,18 @@ class HealingPotion(Item):
 
         return f"{line}"
 
-    def use(self, player_unit, game, in_convoy = False):
+    def use(self, player_unit, game, in_convoy=False):
+        """
+        Apply the healing effect to a player unit and update inventory.
+
+        Args:
+            player_unit (Fighter): The unit using the potion.
+            game (Game): The game instance (for updating convoy if needed).
+            in_convoy (bool, optional): If True, remove from convoy instead of player items.
+
+        Returns:
+            int: -1 if the unit is already at max HP, 1 if the potion was used successfully.
+        """
         if player_unit.hp == player_unit.max_hp:
             return -1
         else:
@@ -35,7 +83,12 @@ class HealingPotion(Item):
             return 1
 
     def copy(self):
-        """Return a new HealingPotion instance with the same stats."""
+        """
+        Create a copy of this HealingPotion instance.
+
+        Returns:
+            HealingPotion: A new HealingPotion instance with identical attributes.
+        """
         return HealingPotion(
             name=self.name,
             heal_amount=self.heal_amount,

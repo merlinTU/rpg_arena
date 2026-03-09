@@ -194,7 +194,7 @@ CLASS_WEAPON_MAP = {
     UnitClass.SWORDMASTER: [WeaponType.SWORD],
     UnitClass.BERSERKER: [WeaponType.AXE],
     UnitClass.THIEF: [WeaponType.SWORD, WeaponType.MAGIC],
-    UnitClass.SOLIDER: [WeaponType.LANCE],
+    UnitClass.SOLDIER: [WeaponType.LANCE],
     UnitClass.ARCHER: [WeaponType.BOW],
     UnitClass.PALADIN: [WeaponType.SWORD, WeaponType.AXE, WeaponType.LANCE]
 }

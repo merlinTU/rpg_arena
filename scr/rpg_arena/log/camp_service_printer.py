@@ -1,11 +1,32 @@
 import time
 
 class CampServicePrinter:
+    """
+    Handles all printed messages for the camp-related actions in the game.
+
+    This includes:
+        - Opening the camp menu
+        - Displaying the item management interface
+        - Showing player inventory and convoy
+    """
+
     def __init__(self, root_service: "RootService"):
+        """
+        Initializes the CampServicePrinter.
+
+        Args:
+            root_service (RootService): Reference to the main root service for accessing game state.
+        """
         self.root_service = root_service
 
 
     def print_at_open_menu(self):
+        """
+        Prints the main camp menu when the player enters the camp.
+
+        - Displays different messages depending on whether it is the first round.
+        - Shows available options such as entering the arena, managing equipment, visiting the merchant, or exiting the game.
+        """
         print("\n======================================")
 
         if self.root_service.current_game.round == 1:
@@ -20,7 +41,19 @@ class CampServicePrinter:
         print("4) Exit game")
         print("======================================\n")
 
+
     def print_at_open_item_manager(self):
+        """
+        Prints the item management menu for the player.
+
+        - Shows all items in the player's inventory (equipped weapons first).
+        - Shows items stored in the convoy.
+        - Displays the available commands for managing items:
+            - send <no>: Move item from Inventory to Convoy
+            - take <no>: Move item from Convoy to Inventory
+            - use <no>: Use an item from Inventory
+            - exit: Leave the item management menu
+        """
         player = self.root_service.current_game.player
         convoy = self.root_service.current_game.convoy
 
