@@ -56,6 +56,8 @@ class InformationService:
                 self.printer.print_all_combat_stats()
             case "hit" | "avoid" | "acc" | "crit" | "damage":
                 self.printer.print_combat_stat(target)
+            case "gold":
+                self.printer.print_gold()
             case _ if target in weapons_lower:
                 weapon = weapons_lower[target]
                 self.printer.print_weapon_info(weapon)

@@ -17,10 +17,18 @@ class InformationServicePrinter:
 
     def print_player(self):
         """
-        Prints detailed stats for the player unit by delegating to the GameServicePrinter.
+        Prints stats for the player unit by delegating to the GameServicePrinter.
         """
         player = self.root_service.current_game.player
         self.root_service.game_service.printer.print_unit_stats(player, 1)
+        print(f"Gold: {player.gold}")
+
+    def print_gold(self):
+        """
+        Prints the amount of gold the player has
+        """
+        player = self.root_service.current_game.player
+        print(f"You have {player.gold} Gold")
 
     def print_enemy(self):
         """

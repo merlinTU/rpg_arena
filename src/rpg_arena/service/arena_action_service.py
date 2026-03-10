@@ -46,8 +46,13 @@ class ArenaActionService:
             choice = int(choice)
 
             if choice == 1:
-                self.open_fight_menu()
-                break
+                player = self.root_service.current_game.player
+                for item in player.items:
+                    if isinstance(item, Weapon):
+                        self.open_fight_menu()
+                        return
+                print("You can't attack. You have no Weapons!")
+
             elif choice == 2:
                 self.open_inventory()
                 break
@@ -151,7 +156,10 @@ class ArenaActionService:
         """
         player = self.root_service.current_game.player
         enemy = self.root_service.arena_service.enemy
-        self.root_service.arena_service.make_fight_round(enemy, player)
+        if enemy.equipped_weapon == None:
+            print("> Gladiator waits.")
+        else:
+            self.root_service.arena_service.make_fight_round(enemy, player)
 
     def make_inventory_decision(self):
         """

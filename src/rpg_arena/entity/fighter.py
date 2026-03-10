@@ -151,6 +151,7 @@ class Fighter:
                     setattr(self, "max_hp", current_value + 1)
                 increased_stats.append(display_name)
 
+        self.level += 1
         return increased_stats
 
     def calc_hit(self):
@@ -207,6 +208,8 @@ class Fighter:
         Returns:
             int | float: The corrected speed value used in combat calculations.
         """
+        if self.equipped_weapon is None:
+            return self.speed
         cor_speed = self.speed - max(0, self.equipped_weapon.weight - self.strength)
 
         return cor_speed

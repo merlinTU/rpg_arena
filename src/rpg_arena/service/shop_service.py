@@ -73,7 +73,10 @@ class ShopService:
         player = self.root_service.current_game.player
         convoy = self.root_service.current_game.convoy
 
-        if not player.items and not convoy.items:
+        for item in player.items:
+            item.update_price()
+
+        if not player.items and not convoy:
             print("You have no items to sell.")
             self.open_shop()
             return
@@ -154,6 +157,9 @@ class ShopService:
             item = player.items.pop(number)
 
         player.gold += item.price
+
+        if item == player.equipped_weapon:
+            player.equipped_weapon = None
 
         print(player.name, "sold", item.name, f"and gained {item.price}.")
         print("You have", player.gold, "gold now.")

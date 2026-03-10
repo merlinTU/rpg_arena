@@ -102,7 +102,7 @@ class GameServicePrinter():
             number (int): The numbered index to display before the unit.
         """
         name_width = 15
-        print(f"{number}) {unit.name:<{name_width}} ({unit.player_class.value})")
+        print(f"{number}) {unit.name:<{name_width}} ({unit.player_class.value}) LV: {unit.level} ")
 
         # Stats
         stat_width = 6

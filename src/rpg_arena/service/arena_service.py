@@ -1,3 +1,5 @@
+import time
+
 from rpg_arena.entity.weapon_type import WeaponType
 from rpg_arena.log.arena_service_printer import ArneaServicePrinter
 from rpg_arena.service.arena_action_service import ArenaActionService
@@ -120,23 +122,66 @@ class ArenaService:
             int | None: Returns 1 if the round completed, None if the fight ended.
         """
         self.make_attack(first_unit, second_unit, 1)
-        if second_unit.hp > 0:
-            self.make_attack(second_unit, first_unit, 3)
-        else:
+        first_unit_weapon_broke = self.check_weapon_destroyed(first_unit)
+
+
+        if second_unit.hp <= 0:
             return self.end_fight()
+
+        elif second_unit.hp > 0 and second_unit.equipped_weapon is not None:
+            self.make_attack(second_unit, first_unit, 3)
+            second_unit_weapon_broke = self.check_weapon_destroyed(second_unit)
+
+        if second_unit.equipped_weapon is None:
+            print(f"> {second_unit.name} can't do anything.")
+            second_unit_weapon_broke = False
 
         if first_unit.hp == 0:
             return self.end_fight()
 
-        if first_unit.calc_corrected_speed() > second_unit.calc_corrected_speed() + 5:
+        if self.check_sec_attack(first_unit, second_unit) and first_unit_weapon_broke:
             self.make_attack(first_unit, second_unit, 2)
-        elif second_unit.calc_corrected_speed() > first_unit.calc_corrected_speed() + 5:
+            self.check_weapon_destroyed(first_unit)
+
+        elif self.check_sec_attack(second_unit, first_unit) and second_unit_weapon_broke:
             self.make_attack(second_unit, first_unit, 2)
+            self.check_weapon_destroyed(second_unit)
 
         if first_unit.hp == 0 or second_unit.hp == 0:
             return self.end_fight()
 
         return 1
+
+    def check_sec_attack(self, unit1, unit2):
+        """
+        Calculates weather unit 1 can strike for a second time.
+
+        Returns:
+                second_attack (bool)
+        """
+        return unit1.calc_corrected_speed() > unit2.calc_corrected_speed() + 5
+
+    def check_weapon_destroyed(self, unit: "Fighter"):
+        """
+        checks weather a weapon broke during the fight.
+
+        Returns:
+            continue_fight (bool): Determines if the fighter can make an attack.
+        """
+        weapon = unit.equipped_weapon
+        continue_fight = True
+
+        if weapon is None:
+            print(f"> {unit.name} can't do anything.")
+            continue_fight = False
+            return continue_fight
+
+        if weapon.uses == 0:
+            weapon.break_weapon(unit)
+            continue_fight = False
+            print(f"> {unit.name}'s", weapon.name, "broke.")
+            time.sleep(1)
+        return continue_fight
 
     def end_fight(self):
         """
@@ -249,6 +294,8 @@ class ArenaService:
                 2 if defender has advantage (-20 hit)
                 3 if no advantage
         """
+        if defender_weapon is None or attacker_weapon is None:
+            return 3
         weapon_triangle = {
             WeaponType.SWORD: WeaponType.AXE,
             WeaponType.AXE: WeaponType.LANCE,

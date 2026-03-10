@@ -33,6 +33,7 @@ class HealingPotion(Item):
         super().__init__(name, True, price)
         self.heal_amount = heal_amount
         self.uses = uses
+        self.max_uses = uses
 
     def __str__(self, index=None):
         """
@@ -95,3 +96,9 @@ class HealingPotion(Item):
             uses=self.uses,
             price=self.price
         )
+
+    def update_price(self):
+        """
+        Updates the price of the item based on its remaining durability.
+        """
+        self.price = self.price * self.uses / self.max_uses

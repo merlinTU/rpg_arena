@@ -32,6 +32,7 @@ class StatBooster(Item):
         self.status = status
         self.boost = boost
         self.uses = 1
+        self.max_uses = 1
 
     def __str__(self, index=None):
         """
@@ -117,3 +118,9 @@ class StatBooster(Item):
 
         print(f"{player_unit.name}'s {self.status} increased by {self.boost}!")
         time.sleep(1)
+
+    def update_price(self):
+        """
+        Updates the price of the item based on its remaining durability.
+        """
+        self.price = self.price * self.uses / self.max_uses

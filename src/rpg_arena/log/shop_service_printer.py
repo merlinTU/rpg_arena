@@ -37,8 +37,11 @@ class ShopServicePrinter:
         Args:
             items (list): List of item objects available in the shop.
         """
+        player = self.root_service.current_game.player
         first_heal = True
         first_booster = True
+
+        print(f"You have {player.gold} Gold")
 
         print("\n--- Weapons ---")
         time.sleep(1)
