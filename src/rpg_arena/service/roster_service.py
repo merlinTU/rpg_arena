@@ -1,6 +1,7 @@
 import random
 from rpg_arena.entity.unit_class import UnitClass
 from rpg_arena.entity.fighter import Fighter
+from rpg_arena.service.data.final_boss_data import BOSS_DATA
 from rpg_arena.service.data.names import fighter_names
 from rpg_arena.service.data.weapon_data import WEAPONS, CLASS_WEAPON_MAP, WEAK_WEAPONS, STRONG_WEAPONS, MEDIUM_WEAPONS
 from rpg_arena.service.data.item_data import NORMAL_ITEMS, RARE_ITEMS
@@ -133,7 +134,11 @@ class RosterService:
         Returns:
             Fighter: New randomly generated Fighter unit.
         """
-        random_class = random.choice(list(UnitClass))
+        # exclude boss classes for player and non boss enemies
+        excluded_classes = {UnitClass.MAGEKNIGHT, UnitClass.SAGE, UnitClass.WARRIOR}
+        available_classes = [cls for cls in UnitClass if cls not in excluded_classes]
+        random_class = random.choice(available_classes)
+
         new_fighter = Fighter(random_class)
         new_fighter = self.modify_unit_values(new_fighter, type_)
         random_weapon = self.random_weapon(random_class, type_)
@@ -257,3 +262,55 @@ class RosterService:
                 base_gold = round_ * 500
                 unit.gold = max(500, int(base_gold + random.normalvariate(0, base_gold * 0.1)))
                 unit.exp = 150
+
+    def generate_boss_unit(self):
+        """
+        Generates a random boss as a Fighter object.
+
+        Randomly selects an entry from the global BOSS_DATA list and creates
+        a Fighter instance from it, including all stats, items, and the
+        currently equipped weapon.
+
+        Returns:
+            Fighter: A fully configured boss as a Fighter object.
+        """
+        random_boss = random.randint(0, 2)
+
+        boss = self.create_fighter_from_dict(BOSS_DATA[random_boss])
+        return boss
+
+    def create_fighter_from_dict(self, data: dict):
+        """
+        Creates a Fighter from a dictionary containing boss or unit data.
+
+        This function initializes a Fighter with the specified UnitClass and
+        then overwrites all base stats, level, items, and the currently
+        equipped weapon according to the values in the dictionary.
+
+        Args:
+            data (dict): A dictionary containing the Fighter's data
+
+        Returns:
+            Fighter: A fully configured Fighter with stats, inventory, and
+                     equipped weapon.
+        """
+
+        fighter = Fighter(player_class=data["unit_class"])
+
+        fighter.name = data["name"]
+        fighter.level = data["level"]
+        fighter.max_hp = data["hp"]
+        fighter.hp = data["hp"]
+        fighter.strength = data["strength"]
+        fighter.magic = data["magic"]
+        fighter.skill = data["skill"]
+        fighter.speed = data["speed"]
+        fighter.luck = data["luck"]
+        fighter.defense = data["defense"]
+        fighter.res = data["res"]
+        fighter.gold = data["gold"]
+
+        fighter.items = data.get("items", [])
+        fighter.equipped_weapon = data.get("equipped_weapon", None)
+
+        return fighter

@@ -59,7 +59,8 @@ class GameService:
 
     def start_arena(self):
         """
-        Initialize the arena by generating enemy units and printing the initial state.
+        Initialize the arena by generating enemy units and printing the initial state. If the last round is
+        reached, the arnea battle with the final boss should take place
 
         Args:
             None
@@ -67,5 +68,16 @@ class GameService:
         Returns:
             None
         """
-        enemy_units = self.root_service.roster_service.generate_enemy_units()
-        self.printer.print_after_start_frist_round(enemy_units)
+        game = self.root_service.current_game
+
+        if game.round == game.end_round:
+            boss_unit = self.root_service.roster_service.generate_boss_unit()
+            self.root_service.arena_service.start_arena(boss_unit)
+        else:
+            enemy_units = self.root_service.roster_service.generate_enemy_units()
+            self.printer.print_after_start_frist_round(enemy_units)
+
+    def end_game(self):
+        player_unit = self.root_service.current_game.player
+        self.printer.print_after_end_game(player_unit)
+        return

@@ -133,5 +133,33 @@ CLASS_DATA = {
         growth_hp=0.0, growth_str=0.10, growth_magic=0.0,
         growth_skill=0.10, growth_speed=0.10,
         growth_luck=0.0, growth_defense=0.0, growth_res=0.10
+    ),
+
+    # Boss Classes are empty:
+    UnitClass.SAGE: ClassStats(
+            base_hp=0, base_str=0, base_magic=0,
+            base_skill=0, base_speed=0, base_luck=0,
+            base_defense=0, base_res=0,
+            growth_hp=0.0, growth_str=0.0, growth_magic=0.0,
+            growth_skill=0.0, growth_speed=0.0,
+            growth_luck=0.0, growth_defense=0.0, growth_res=0.0
+        ),
+
+    UnitClass.WARRIOR: ClassStats(
+            base_hp=0, base_str=0, base_magic=0,
+            base_skill=0, base_speed=0, base_luck=0,
+            base_defense=0, base_res=0,
+            growth_hp=0.0, growth_str=0.0, growth_magic=0.0,
+            growth_skill=0.0, growth_speed=0.0,
+            growth_luck=0.0, growth_defense=0.0, growth_res=0.0
+        ),
+
+    UnitClass.MAGEKNIGHT: ClassStats(
+        base_hp=0, base_str=0, base_magic=0,
+        base_skill=0, base_speed=0, base_luck=0,
+        base_defense=0, base_res=0,
+        growth_hp=0.0, growth_str=0.0, growth_magic=0.0,
+        growth_skill=0.0, growth_speed=0.0,
+        growth_luck=0.0, growth_defense=0.0, growth_res=0.0
     )
 }

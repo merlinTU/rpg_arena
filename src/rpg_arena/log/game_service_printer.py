@@ -165,3 +165,35 @@ class GameServicePrinter():
 
         time.sleep(1)
         print("========================================")
+
+    def print_after_end_game(self, player_unit):
+        """
+        Prints the final victory message after the game ends.
+
+        Displays the player's final stats, then celebrates their triumph
+        as the new arena champion.
+
+        Args:
+            player_unit (Fighter): The player's unit that completed the game.
+        """
+
+        # Dramatic victory message
+        time.sleep(1)
+        print("\n======================================")
+        print("🏆  VICTORY!  🏆")
+        print("======================================\n")
+
+        time.sleep(1)
+        self.print_unit_stats(player_unit, 1)
+
+        time.sleep(1)
+        print(f"The arena falls silent as {player_unit.name} emerges victorious!")
+        print("Crowds cheer and banners wave in honor of your might.\n")
+        time.sleep(1)
+
+        print("You have conquered every foe, survived every trial,")
+        print("and claimed the title of ARENA CHAMPION!\n")
+        time.sleep(1)
+
+        print("May your legend echo through the lands for generations to come! ⚔️")
+        print("======================================\n")

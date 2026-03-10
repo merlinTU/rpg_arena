@@ -31,6 +31,9 @@ class CampServicePrinter:
 
         if self.root_service.current_game.round == 1:
             print("You enter the camp to prepare for your first battle")
+        elif self.root_service.current_game.round == self.root_service.current_game.end_round:
+            print("The final round has arrived!")
+            print("A mighty foe awaits you in the next battle… Brace yourself!")
         else:
             print("You return to the camp after the battle.")
 
@@ -40,6 +43,7 @@ class CampServicePrinter:
         print("3) Visit the merchant")
         print("4) Exit game")
         print("======================================\n")
+
 
 
     def print_at_open_item_manager(self):

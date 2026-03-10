@@ -8,6 +8,7 @@ class Game:
         convoy (list): Shared storage for items not carried by the player.
         player_weapons (list): List of weapons owned by the player.
         max_items (int): Maximum number of items the player can carry.
+        end_round (int): The end round of the game.
     """
 
     def __init__(self):
@@ -22,3 +23,4 @@ class Game:
         self.convoy = []
         self.player_weapons = []
         self.max_items = 5
+        self.end_round = 20

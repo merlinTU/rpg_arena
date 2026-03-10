@@ -18,6 +18,10 @@ class UnitClass(Enum):
         SOLIDER (str): Solider class.
         ARCHER (str): Archer class.
         PALADIN (str): Paladin class.
+        PALADIN (str): "Paladin"
+        WARRIOR (str): "Warrior"
+        MAGEKNIGHT (str): "Mage Knight"
+        SAGE (str): "Sage"
     """
 
     FIGHTER = "Fighter"
@@ -30,3 +34,6 @@ class UnitClass(Enum):
     SOLDIER = "Solider"
     ARCHER = "Archer"
     PALADIN = "Paladin"
+    WARRIOR = "Warrior"
+    MAGEKNIGHT = "Mage Knight"
+    SAGE = "Sage"

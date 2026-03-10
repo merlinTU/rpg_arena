@@ -101,7 +101,10 @@ class ArenaService:
                 level_up_stats = player_unit.level_up()
                 self.printer.print_level_up(level_up_stats)
 
-            self.root_service.camp_service.open_camp()
+            if self.root_service.current_game.round == self.root_service.current_game.end_round:
+                self.root_service.game_service.end_game()
+            else:
+                self.root_service.camp_service.open_camp()
         else:
             return
 

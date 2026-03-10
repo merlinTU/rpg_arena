@@ -30,9 +30,6 @@ class CampService:
         """
         Open the camp menu and prompt the player to choose an action.
 
-        Args:
-            None
-
         Returns:
             None
         """
