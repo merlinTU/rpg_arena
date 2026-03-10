@@ -30,10 +30,11 @@ class Weapon(Item):
             weapon_type (WeaponType): Type of the weapon.
             strength (int): Attack power of the weapon.
             accuracy (int): Hit chance of the weapon.
-            uses (int): Durability of the weapon (number of uses).
+            uses (int): Durability of the weapon.
             crit (int): Critical hit chance of the weapon.
             weight (int): Weight affecting user's speed.
             price (int): Purchase price of the weapon.
+
 
         Returns:
             None
@@ -43,6 +44,7 @@ class Weapon(Item):
         self.strength = strength
         self.accuracy = accuracy
         self.uses = uses
+        self.max_uses = uses
         self.crit = crit
         self.weight = weight
 
@@ -87,3 +89,21 @@ class Weapon(Item):
             f"WEIGHT: {self.weight:>{stat_width}} | "
             f"USES: {self.uses:>{stat_width}} |"
         )
+
+    def update_price(self):
+        """
+        Updates the price of the item based on its remaining durability.
+        """
+        self.price = self.price * self.uses / self.max_uses
+
+    def break_weapon(self, player):
+        """
+        Breaks the weapon of a unit. Used if weapon.uses == 0.
+        """
+        player.items.remove(self)
+
+        for item in player.items:
+            if isinstance(item, Weapon):
+                player.equipped_weapon = item
+        else:
+            player.equipped_weapon = None

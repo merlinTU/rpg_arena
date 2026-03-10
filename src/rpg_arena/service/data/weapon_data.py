@@ -65,7 +65,7 @@ steel_sword = Weapon(
     accuracy=90,
     uses=10,
     crit=5,
-    weight=5,
+    weight=10,
     price=300
 )
 
@@ -76,7 +76,7 @@ steel_axe = Weapon(
     accuracy=75,
     uses=10,
     crit=5,
-    weight=7,
+    weight=15,
     price=320
 )
 
@@ -87,7 +87,7 @@ steel_lance = Weapon(
     accuracy=85,
     uses=10,
     crit=5,
-    weight=6,
+    weight=13,
     price=310
 )
 
@@ -98,7 +98,7 @@ steel_bow = Weapon(
     accuracy=115,
     uses=15,
     crit=10,
-    weight=4,
+    weight=14,
     price=290
 )
 
@@ -109,7 +109,7 @@ thunder = Weapon(
     accuracy=100,
     uses=10,
     crit=5,
-    weight=0,
+    weight=8,
     price=350
 )
 
@@ -120,7 +120,7 @@ silver_sword = Weapon(
     accuracy=100,
     uses=5,
     crit=0,
-    weight=6,
+    weight=14,
     price=600
 )
 
@@ -131,7 +131,7 @@ silver_axe = Weapon(
     accuracy=85,
     uses=5,
     crit=0,
-    weight=8,
+    weight=20,
     price=650
 )
 
@@ -142,7 +142,7 @@ silver_lance = Weapon(
     accuracy=90,
     uses=5,
     crit=0,
-    weight=7,
+    weight=16,
     price=620
 )
 
@@ -153,7 +153,7 @@ silver_bow = Weapon(
     accuracy=120,
     uses=5,
     crit=15,
-    weight=5,
+    weight=15,
     price=610
 )
 
@@ -163,7 +163,7 @@ dire_thunder = Weapon(
     strength=15,
     accuracy=95,
     uses=5,
-    crit=0,
+    crit=15,
     weight=8,
     price=700
 )
