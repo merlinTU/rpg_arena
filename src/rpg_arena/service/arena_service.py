@@ -306,7 +306,7 @@ class ArenaService:
 
             # boost attack values
             if weapon.weapon_type == WeaponType.MAGIC:
-                new_attacker_magic = skill.activate(attacker_magic, "magic", "attack", attacker)
+                new_attacker_magic = skill.activate(attacker_magic, "magic", "attacker", attacker)
                 if new_attacker_magic != attacker_magic:
                     self.printer.print_after_prob_skill(attacker, skill.name)
                 attacker_magic = new_attacker_magic
@@ -314,18 +314,20 @@ class ArenaService:
             else:
                 new_attacker_attack = skill.activate(attacker_attack, "str", "attacker", attacker)
                 if new_attacker_attack != attacker_attack:
-                    self.printer.print_after_prob_skill(defender, skill.name)
+                    self.printer.print_after_prob_skill(attacker, skill.name)
                 attacker_attack = new_attacker_attack
 
             # attacker changes enemy defense stats
             if weapon.weapon_type == WeaponType.MAGIC:
-                defender_res = skill.activate(defender_res, "res", "attacker", defender)
-                if defender_res != defender.res:
+                new_defender_res = skill.activate(defender_res, "res", "attacker", attacker)
+                if new_defender_res != defender_res:
                     self.printer.print_after_prob_skill(attacker, skill.name)
+                defender_res = new_defender_res
             else:
-                defender_def = skill.activate(defender_def, "def", "attacker", defender)
-                if defender_def != defender.defense:
+                new_defender_def = skill.activate(defender_def, "def", "attacker", attacker)
+                if new_defender_def != defender_def:
                     self.printer.print_after_prob_skill(attacker, skill.name)
+                defender_def = new_defender_def
 
         # skills of the defender
         for skill in defender.skills:
@@ -334,14 +336,14 @@ class ArenaService:
 
             # reduce attack value of the attacker
             if weapon.weapon_type == WeaponType.MAGIC:
-                new_attacker_magic = skill.activate(attacker_magic, "magic", "defender", attacker)
+                new_attacker_magic = skill.activate(attacker_magic, "magic", "defender", defender)
                 if new_attacker_magic != attacker_magic:
-                    self.printer.print_after_prob_skill(attacker, skill.name)
+                    self.printer.print_after_prob_skill(defender, skill.name)
                 attacker_magic = new_attacker_magic
             else:
-                new_attacker_attack = skill.activate(attacker_attack, "str", "defender", attacker)
+                new_attacker_attack = skill.activate(attacker_attack, "str", "defender", defender)
                 if new_attacker_attack != attacker_attack:
-                    self.printer.print_after_prob_skill(attacker, skill.name)
+                    self.printer.print_after_prob_skill(defender, skill.name)
                 attacker_attack = new_attacker_attack
 
         # calculate damage

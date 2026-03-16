@@ -33,7 +33,7 @@ class ProbSkill(Skill):
         if target_type != self.target or attack_type != self.type_:
             return value_to_modify
 
-        if random.random() < unit.skill:
-            return value_to_modify / self.value
+        if random.random() < unit.skill / 100:
+            return value_to_modify // self.value
         else:
             return value_to_modify

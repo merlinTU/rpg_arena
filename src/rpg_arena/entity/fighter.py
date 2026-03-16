@@ -82,7 +82,7 @@ class Fighter:
         self.res_growth = stats.growth_res
 
         self.equipped_weapon = None
-        self.gold = 99999
+        self.gold = 9999
         self.exp = 0
         self.items = []
         self.skills = []
@@ -168,7 +168,7 @@ class Fighter:
             float: The calculated hit value.
         """
         weapon_hit = self.equipped_weapon.accuracy
-        weapon_hit + self.skill * 2 + self.luck * 0.5
+        weapon_hit = weapon_hit + self.skill * 2 + self.luck // 2
 
         return self.check_combat_skills(weapon_hit, "hit")
 
@@ -194,7 +194,7 @@ class Fighter:
             float: The calculated critical hit value.
         """
         weapon_crit = self.equipped_weapon.crit
-        weapon_crit += self.skill * 0.5
+        weapon_crit += self.skill // 2
 
         return self.check_combat_skills(weapon_crit, "crt")
 

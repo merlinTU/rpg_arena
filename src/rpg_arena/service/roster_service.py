@@ -4,7 +4,7 @@ from rpg_arena.entity.unit_class import UnitClass
 from rpg_arena.entity.fighter import Fighter
 from rpg_arena.service.data.final_boss_data import BOSS_DATA
 from rpg_arena.service.data.names import fighter_names
-from rpg_arena.service.data.prob_skill_data import SKILLS
+from rpg_arena.service.data.prob_skill_data import START_SKILLS
 from rpg_arena.service.data.weapon_data import WEAPONS, CLASS_WEAPON_MAP, WEAK_WEAPONS, STRONG_WEAPONS, MEDIUM_WEAPONS
 from rpg_arena.service.data.item_data import NORMAL_ITEMS, RARE_ITEMS
 
@@ -237,7 +237,7 @@ class RosterService:
 
     def give_random_skill(self, unit):
         if random.random() < 0.2:
-            unit.skills.append(random.choice(SKILLS))
+            unit.skills.append(random.choice(START_SKILLS))
 
     def generate_enemy_units(self) -> list["Fighter"]:
         """
