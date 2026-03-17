@@ -15,13 +15,11 @@ class Weapon(Item):
         uses (int): Number of times the weapon can be used before breaking.
         crit (int): Weapon's critical hit chance.
         weight (int): Weight of the weapon, affecting the wielder's speed.
-    Methods:
-        copy(): Returns a new Weapon instance with the same stats.
-        __str__(index=None): Returns a formatted string representation of the weapon.
+        magical (bool) : Indicates whether weapon is magical or not
     """
 
     def __init__(self, name, weapon_type: WeaponType, strength: int, accuracy: int,
-                 uses: int, crit: int, weight: int, price: int):
+                 uses: int, crit: int, weight: int, price: int, is_magical = False):
         """
         Initialize a Weapon instance with stats, type, and price.
 
@@ -47,6 +45,7 @@ class Weapon(Item):
         self.max_uses = uses
         self.crit = crit
         self.weight = weight
+        self.magical = is_magical
 
     def copy(self):
         """
@@ -63,7 +62,8 @@ class Weapon(Item):
             uses=self.uses,
             crit=self.crit,
             weight=self.weight,
-            price=self.price
+            price=self.price,
+            is_magical= self.magical
         )
 
     def __str__(self, index=None):
@@ -94,7 +94,7 @@ class Weapon(Item):
         """
         Updates the price of the item based on its remaining durability.
         """
-        self.price = self.price * self.uses / self.max_uses
+        self.price = int(self.price * self.uses / self.max_uses)
 
     def break_weapon(self, player):
         """

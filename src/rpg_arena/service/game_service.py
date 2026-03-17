@@ -1,6 +1,12 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
 from rpg_arena.entity.game import Game
 from rpg_arena.log.game_service_printer import GameServicePrinter
 from rpg_arena.service.data.weapon_data import CLASS_WEAPON_MAP
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
 
 class GameService:
     """
@@ -12,7 +18,7 @@ class GameService:
         printer (GameServicePrinter): Utility to print game state updates for the user.
     """
 
-    def __init__(self, root_service: "RootService"):
+    def __init__(self, root_service: RootService):
         """
         Initialize the GameService with a reference to the root service.
 
@@ -37,8 +43,6 @@ class GameService:
         - Assigns the player's weapons based on unit class
         - Opens the camp for further actions
 
-        Args:
-            None
 
         Returns:
             None
@@ -61,9 +65,6 @@ class GameService:
         """
         Initialize the arena by generating enemy units and printing the initial state. If the last round is
         reached, the arnea battle with the final boss should take place
-
-        Args:
-            None
 
         Returns:
             None

@@ -1,4 +1,3 @@
-from distutils.command.check import check
 
 from .stat_modifier_skill import StatModifierSkill
 from .unit_class import UnitClass
@@ -158,7 +157,7 @@ class Fighter:
         self.level += 1
         return increased_stats
 
-    def calc_hit(self):
+    def calc_hit(self) -> int:
         """
         Calculate the fighter's hit chance.
 
@@ -172,7 +171,7 @@ class Fighter:
 
         return self.check_combat_skills(weapon_hit, "hit")
 
-    def calc_avoid(self):
+    def calc_avoid(self) -> int:
         """
         Calculate the fighter's avoid value.
 
@@ -184,7 +183,7 @@ class Fighter:
         avoid = self.calc_corrected_speed() * 2 + self.luck
         return self.check_combat_skills(avoid, "avoid")
 
-    def calc_crit(self):
+    def calc_crit(self) -> int:
         """
         Calculate the fighter's critical hit chance.
 
@@ -198,7 +197,7 @@ class Fighter:
 
         return self.check_combat_skills(weapon_crit, "crt")
 
-    def calc_crit_avoid(self):
+    def calc_crit_avoid(self) -> int:
         """
         Calculate the fighter's resistance to critical hits.
 
@@ -208,7 +207,7 @@ class Fighter:
         crt_avoid = self.check_combat_skills(self.luck, "crt_avoid")
         return crt_avoid
 
-    def calc_corrected_speed(self):
+    def calc_corrected_speed(self) -> int:
         """
         Calculate the fighter's corrected speed considering weapon weight.
 

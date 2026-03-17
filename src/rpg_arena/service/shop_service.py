@@ -1,11 +1,14 @@
+from __future__ import annotations
 import time
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
 from rpg_arena.entity.healing_potion import HealingPotion
 from rpg_arena.entity.stat_booster import StatBooster
 from rpg_arena.entity.weapon_skill import WeaponSkill
 from rpg_arena.log.shop_service_printer import ShopServicePrinter
-from rpg_arena.service.data.prob_skill_data import PROB_SKILLS, SKILLS
-from rpg_arena.service.data.stat_modifer_data import STAT_MODIFIERS
+from rpg_arena.service.data.prob_skill_data import SKILLS
 from rpg_arena.service.shop_action_service import ShopActionService
 from rpg_arena.service.data.item_data import ITEMS
 from rpg_arena.service.data.weapon_data import WEAPONS

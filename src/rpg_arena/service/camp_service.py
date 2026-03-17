@@ -1,3 +1,10 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
+
 from rpg_arena.log.camp_service_printer import CampServicePrinter
 
 class CampService:
@@ -39,9 +46,6 @@ class CampService:
     def open_item_manager(self):
         """
         Open the item manager menu and prompt the player to manage items.
-
-        Args:
-            None
 
         Returns:
             None

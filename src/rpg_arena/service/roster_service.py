@@ -1,5 +1,9 @@
+from __future__ import annotations
+
 import random
 import numpy as np
+from typing import TYPE_CHECKING
+
 from rpg_arena.entity.unit_class import UnitClass
 from rpg_arena.entity.fighter import Fighter
 from rpg_arena.service.data.final_boss_data import BOSS_DATA
@@ -7,6 +11,9 @@ from rpg_arena.service.data.names import fighter_names
 from rpg_arena.service.data.prob_skill_data import START_SKILLS
 from rpg_arena.service.data.weapon_data import WEAPONS, CLASS_WEAPON_MAP, WEAK_WEAPONS, STRONG_WEAPONS, MEDIUM_WEAPONS
 from rpg_arena.service.data.item_data import NORMAL_ITEMS, RARE_ITEMS
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
 
 class RosterService:
     """
@@ -27,7 +34,7 @@ class RosterService:
         level_enemy_unit(unit, strength): Level an enemy unit and assign gold/experience.
     """
 
-    def __init__(self, root_service: "RootService"):
+    def __init__(self, root_service: RootService):
         """
         Initialize the RosterService with a reference to RootService.
 
@@ -69,9 +76,14 @@ class RosterService:
         unit.defense_growth += self.generate_unit_growth_value(type_)
         unit.res_growth += self.generate_unit_growth_value(type_)
 
+        # set negative attributes to 0
+        for attr, value in vars(unit).items():
+            if isinstance(value, (int, float)) and value < 0:
+                setattr(unit, attr, 0)
         return unit
 
-    def generate_unit_growth_value(self, type_: int) -> float:
+    @staticmethod
+    def generate_unit_growth_value(type_: int) -> float:
         """
         Generate a random growth rate for a unit based on type.
 
@@ -89,9 +101,13 @@ class RosterService:
             # weak enemy
             case 2:
                 range_ = range(0, 6)
-                center = 0.15
-            # strong enemy
+                center = 0.10
+            # normal enemy
             case 3:
+                range_ = range(1, 8)
+                center = 0.20
+            # strong enemy
+            case 4:
                 range_ = range(5, 12)
                 center = 0.35
             case _:
@@ -102,7 +118,8 @@ class RosterService:
         weights = [np.exp(-abs(value - center) / 1.7) for value in possible_growths]
         return random.choices(possible_growths, weights=weights, k=1)[0]
 
-    def generate_unit_stat_value(self, type_: int) -> int:
+    @staticmethod
+    def generate_unit_stat_value(type_: int) -> int:
         """
         Generate a base stat value for a unit based on its type.
 
@@ -113,16 +130,20 @@ class RosterService:
             int: Base stat value.
         """
         match type_:
-            # player unit or normal enemy
+            # player unit
             case 1:
                 possible_values = list(range(3, 7))
                 center = 5
             # weak enemy
             case 2:
-                possible_values = list(range(1, 7))
+                possible_values = list(range(0, 3))
+                center = 3
+            # normal enemy
+            case 3:
+                possible_values = list(range(2, 5))
                 center = 3
             # strong enemy
-            case 3:
+            case 4:
                 possible_values = list(range(5, 9))
                 center = 6
             case _:
@@ -143,7 +164,7 @@ class RosterService:
         Returns:
             Fighter: New randomly generated Fighter unit.
         """
-        # exclude boss classes for player and non boss enemies
+        # exclude boss classes for player and non-boss enemies
         excluded_classes = {UnitClass.MAGEKNIGHT, UnitClass.SAGE, UnitClass.WARRIOR}
         available_classes = [cls for cls in UnitClass if cls not in excluded_classes]
         random_class = random.choice(available_classes)
@@ -172,7 +193,7 @@ class RosterService:
 
         match type_:
             # normal unit
-            case 1:
+            case 1 | 3:
                 base_strong = 0.05
                 base_medium = 0.25
             # weak unit
@@ -180,7 +201,7 @@ class RosterService:
                 base_strong = 0
                 base_medium = 0.05
             # strong enemy
-            case 3:
+            case 4:
                 base_strong= 0.2
                 base_medium = 0.5
             case _:
@@ -201,7 +222,8 @@ class RosterService:
 
         return random.choice(weapons).copy()
 
-    def random_item(self):
+    @staticmethod
+    def random_item():
         """
         Generate a random item (normal or rare).
 
@@ -235,7 +257,8 @@ class RosterService:
                 units[i].items.append(self.random_item())
         return units
 
-    def give_random_skill(self, unit):
+    @staticmethod
+    def give_random_skill(unit):
         if random.random() < 0.2:
             unit.skills.append(random.choice(START_SKILLS))
 
@@ -247,8 +270,8 @@ class RosterService:
             list[Fighter]: List of 3 enemy units.
         """
         easy_enemy = self.generate_random_unit(2)
-        normal_enemy = self.generate_random_unit(1)
-        hard_enemy = self.generate_random_unit(3)
+        normal_enemy = self.generate_random_unit(3)
+        hard_enemy = self.generate_random_unit(4)
 
         units = [easy_enemy, normal_enemy, hard_enemy]
         for i, unit in enumerate(units):
@@ -312,7 +335,8 @@ class RosterService:
         boss = self.create_fighter_from_dict(BOSS_DATA[random_boss])
         return boss
 
-    def create_fighter_from_dict(self, data: dict):
+    @staticmethod
+    def create_fighter_from_dict(data: dict):
         """
         Creates a Fighter from a dictionary containing boss or unit data.
 

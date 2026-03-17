@@ -1,3 +1,9 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
 class ShopActionService:
     """
     Handles all player interactions and decisions inside the shop.
@@ -141,8 +147,6 @@ class ShopActionService:
         Returns:
             None
         """
-        game = self.root_service.current_game
-        player = game.player
         items = self.root_service.shop_service.shop_items
 
         while True:

@@ -1,3 +1,10 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from rpg_arena.entity.fighter import Fighter
+
+
 class Item:
     """
     Represents an item in the game, which can be usable or non-usable
@@ -37,7 +44,7 @@ class Item:
         """
         return f"{self.name}"
 
-    def use(self, player_unit: "Fighter", game):
+    def use(self, player_unit: Fighter, game):
         """
         Use the item on a player unit or modify the game state.
 

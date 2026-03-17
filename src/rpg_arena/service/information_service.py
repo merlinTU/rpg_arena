@@ -1,3 +1,9 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
 from rpg_arena.log.information_service_printer import InformationServicePrinter
 from rpg_arena.service.data.weapon_data import WEAPONS
 class InformationService:
@@ -10,7 +16,7 @@ class InformationService:
 
     """
 
-    def __init__(self, root_service: "RootService"):
+    def __init__(self, root_service: RootService):
         """
         Initialize the InformationService with a reference to RootService.
 

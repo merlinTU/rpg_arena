@@ -1,3 +1,9 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
 class PlayerActionService:
     """
     Service class responsible for handling player input and unit selection.
@@ -91,7 +97,8 @@ class PlayerActionService:
                 else:
                     print("Name not found. Try again.")
 
-    def search_unit_index(self, units, choice: str):
+    @staticmethod
+    def search_unit_index(units, choice: str):
         """
         Search for a unit by name in a list.
 

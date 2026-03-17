@@ -19,7 +19,6 @@ class WeaponSkill(Skill):
         """
         index_str = f"{index}) " if index is not None else ""
         name_width = 20 - len(index_str)
-        type_width = 10
         stat_width = 6
 
         return (

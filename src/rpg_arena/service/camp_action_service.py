@@ -1,3 +1,10 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
+
 class CampActionService:
     """
     Service class responsible for handling player actions within the camp.
@@ -7,7 +14,7 @@ class CampActionService:
 
     """
 
-    def __init__(self, root_service: "RootService"):
+    def __init__(self, root_service: RootService):
         """
         Initialize the CampActionService with a reference to the root service.
 

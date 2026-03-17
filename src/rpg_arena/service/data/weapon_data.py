@@ -15,7 +15,7 @@ iron_sword = Weapon(
 )
 
 master_sword = Weapon(
-    name="Iron Sword",
+    name="Master Sword",
     weapon_type=WeaponType.SWORD,
     strength=6,
     accuracy=100,
@@ -49,7 +49,7 @@ master_bow = Weapon(
 
 
 master_axe = Weapon(
-    name="Master Bow",
+    name="Master Axe",
     weapon_type=WeaponType.AXE,
     strength=10,
     accuracy=80,
@@ -89,7 +89,8 @@ fire_magic = Weapon(
     uses=15,
     crit=0,
     weight=0,
-    price=150
+    price=150,
+    is_magical= True
 )
 
 iron_lance = Weapon(
@@ -110,7 +111,7 @@ steel_sword = Weapon(
     accuracy=90,
     uses=10,
     crit=5,
-    weight=10,
+    weight=8,
     price=300
 )
 
@@ -121,7 +122,7 @@ steel_axe = Weapon(
     accuracy=75,
     uses=10,
     crit=5,
-    weight=15,
+    weight=12,
     price=320
 )
 
@@ -132,7 +133,7 @@ steel_lance = Weapon(
     accuracy=85,
     uses=10,
     crit=5,
-    weight=13,
+    weight=10,
     price=310
 )
 
@@ -143,7 +144,7 @@ steel_bow = Weapon(
     accuracy=115,
     uses=15,
     crit=10,
-    weight=14,
+    weight=9,
     price=290
 )
 
@@ -154,8 +155,9 @@ thunder = Weapon(
     accuracy=100,
     uses=10,
     crit=5,
-    weight=8,
-    price=350
+    weight=5,
+    price=350,
+    is_magical= True
 )
 
 silver_sword = Weapon(
@@ -165,7 +167,7 @@ silver_sword = Weapon(
     accuracy=100,
     uses=5,
     crit=0,
-    weight=14,
+    weight=10,
     price=600
 )
 
@@ -176,7 +178,7 @@ silver_axe = Weapon(
     accuracy=85,
     uses=5,
     crit=0,
-    weight=20,
+    weight=16,
     price=650
 )
 
@@ -187,7 +189,7 @@ silver_lance = Weapon(
     accuracy=90,
     uses=5,
     crit=0,
-    weight=16,
+    weight=14,
     price=620
 )
 
@@ -198,7 +200,7 @@ silver_bow = Weapon(
     accuracy=120,
     uses=5,
     crit=15,
-    weight=15,
+    weight=12,
     price=610
 )
 
@@ -210,25 +212,73 @@ dire_thunder = Weapon(
     uses=5,
     crit=15,
     weight=8,
-    price=700
+    price=700,
+    is_magical= True
+)
+
+thunder_sword = Weapon(
+    name="Thunder Sword",
+    weapon_type=WeaponType.MAGIC,
+    strength=10,
+    accuracy=95,
+    uses=10,
+    crit=0,
+    weight=9,
+    price=500,
+    is_magical= True
+)
+
+fire_lance = Weapon(
+    name="Fire Lance",
+    weapon_type=WeaponType.MAGIC,
+    strength=13,
+    accuracy=80,
+    uses=10,
+    crit=0,
+    weight=12,
+    price=800,
+    is_magical= True
+)
+
+ice_bow = Weapon(
+    name="Ice Bow",
+    weapon_type=WeaponType.MAGIC,
+    strength=9,
+    accuracy=105,
+    uses=10,
+    crit=5,
+    weight=9,
+    price=600,
+    is_magical= True
 )
 
 
 WEAPONS = { "Iron Sword": iron_sword,
-            "Iron Axe": iron_axe,
-            "Iron Bow": iron_bow,
-            "Fire": fire_magic,
-            "Iron Lance": iron_lance,
             "Steel Sword": steel_sword,
-            "Steel Axe": steel_axe,
-            "Steel Lance": steel_lance,
-            "Steel Bow": steel_bow,
-            "Thunder": thunder,
+            "Master Sword" : master_sword,
             "Silver Sword": silver_sword,
+            "Thunder Sword": thunder_sword,
+
+            "Iron Axe": iron_axe,
+            "Steel Axe": steel_axe,
+            "Master Axe": master_axe,
             "Silver Axe": silver_axe,
-            "Silver Lance": silver_lance,
+
+            "Iron Bow": iron_bow,
+            "Steel Bow": steel_bow,
+            "Master Bow" : master_bow,
             "Silver Bow": silver_bow,
-            "Dire Thunder": dire_thunder
+            "Ice Bow": ice_bow,
+
+            "Fire": fire_magic,
+            "Thunder": thunder,
+            "Dire Thunder": dire_thunder,
+
+            "Iron Lance": iron_lance,
+            "Steel Lance": steel_lance,
+            "Master Lance" : master_lance,
+            "Silver Lance": silver_lance,
+            "Fire Lance": fire_lance
             }
 
 CLASS_WEAPON_MAP = {
@@ -257,7 +307,10 @@ MEDIUM_WEAPONS = [
     steel_axe,
     steel_lance,
     steel_bow,
-    thunder
+    thunder,
+    thunder_sword,
+    fire_lance,
+    ice_bow
 ]
 
 STRONG_WEAPONS = [

@@ -1,10 +1,18 @@
-import time
+from __future__ import annotations
 
+import time
+import random
+from typing import TYPE_CHECKING
+
+from rpg_arena.entity import Fighter
 from rpg_arena.entity.prob_skill import ProbSkill
 from rpg_arena.entity.weapon_type import WeaponType
 from rpg_arena.log.arena_service_printer import ArneaServicePrinter
 from rpg_arena.service.arena_action_service import ArenaActionService
-import random
+
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
 
 class ArenaService:
     """
@@ -19,7 +27,7 @@ class ArenaService:
 
     """
 
-    def __init__(self, root_service: "RootService"):
+    def __init__(self, root_service: RootService):
         """
         Initialize ArenaService with references to the root service, printer, and action service.
 
@@ -33,10 +41,10 @@ class ArenaService:
         self.printer = ArneaServicePrinter(root_service)
         self.action_service = ArenaActionService(root_service)
 
-        self.enemy: "Fighter" = None
+        self.enemy: Fighter | None = None
         self.continue_fight = True
 
-    def start_arena(self, enemy: "Fighter"):
+    def start_arena(self, enemy: Fighter):
         """
         Start an arena battle with the given enemy unit.
 
@@ -49,7 +57,7 @@ class ArenaService:
         self.enemy = enemy
         self.arena_simulation(self.root_service.current_game.player, enemy)
 
-    def arena_simulation(self, player_unit: "Fighter", enemy_unit: "Fighter"):
+    def arena_simulation(self, player_unit: Fighter, enemy_unit: Fighter):
         """
         Run the full arena simulation loop until one unit is defeated or player surrenders.
 
@@ -111,7 +119,7 @@ class ArenaService:
         else:
             return
 
-    def make_fight_round(self, first_unit: "Fighter", second_unit: "Fighter"):
+    def make_fight_round(self, first_unit: Fighter, second_unit: Fighter):
         """
         Execute a single combat round, handling attacks based on speed advantage.
 
@@ -124,6 +132,7 @@ class ArenaService:
         """
         self.make_attack(first_unit, second_unit, 1)
         first_unit_weapon_broke = self.check_weapon_destroyed(first_unit)
+        second_unit_weapon_broke = False
 
 
         if second_unit.hp <= 0:
@@ -153,7 +162,8 @@ class ArenaService:
 
         return 1
 
-    def check_sec_attack(self, unit1, unit2):
+    @staticmethod
+    def check_sec_attack(unit1, unit2):
         """
         Calculates weather unit 1 can strike for a second time.
 
@@ -162,7 +172,8 @@ class ArenaService:
         """
         return unit1.calc_corrected_speed() > unit2.calc_corrected_speed() + 5
 
-    def check_weapon_destroyed(self, unit: "Fighter"):
+    @staticmethod
+    def check_weapon_destroyed(unit: Fighter):
         """
         checks weather a weapon broke during the fight.
 
@@ -193,7 +204,7 @@ class ArenaService:
         """
         self.continue_fight = False
 
-    def make_attack(self, attacker: "Fighter", defender: "Fighter", status: int):
+    def make_attack(self, attacker: Fighter, defender: Fighter, status: int):
         """
         Execute a single attack from attacker to defender, considering hit, crit, and weapon.
 
@@ -205,7 +216,7 @@ class ArenaService:
         Returns:
             None
         """
-        hit_chance = self.caluclate_hit_chance(attacker, defender)
+        hit_chance = self.calculate_hit_chance(attacker, defender)
         damage = self.calculate_damage_with_skill(attacker, defender)
         rand_no = random.random()
         has_hit = rand_no < hit_chance
@@ -214,7 +225,7 @@ class ArenaService:
             self.printer.print_after_make_attack(attacker, defender, has_hit, False, damage, status)
             return
 
-        crit_chance = self.caluclate_crit_chance(attacker, defender)
+        crit_chance = self.calculate_crit_chance(attacker, defender)
         has_crit = random.random() < crit_chance
 
         if has_crit:
@@ -226,7 +237,7 @@ class ArenaService:
 
         self.printer.print_after_make_attack(attacker, defender, has_hit, has_crit, damage, status)
 
-    def caluclate_hit_chance(self, attacker: "Fighter", defender: "Fighter"):
+    def calculate_hit_chance(self, attacker: Fighter, defender: Fighter):
         """
         Calculate the hit probability of an attack, considering speed, avoidance, and weapon triangle.
 
@@ -250,7 +261,8 @@ class ArenaService:
         hit_chance = max(0, min(100, hit_chance))
         return hit_chance / 100
 
-    def caluclate_crit_chance(self, attacker: "Fighter", defender: "Fighter"):
+    @staticmethod
+    def calculate_crit_chance(attacker: Fighter, defender: Fighter):
         """
         Calculate the critical hit probability of an attack.
 
@@ -264,7 +276,8 @@ class ArenaService:
         crit_chance = max(0, min(100, attacker.calc_crit() - defender.calc_crit_avoid()))
         return crit_chance / 100
 
-    def calculate_damage(self, attacker: "Fighter", defender: "Fighter"):
+    @staticmethod
+    def calculate_damage(attacker: Fighter, defender: Fighter):
         """
         Calculate the damage dealt from attacker to defender, considering weapon type. Without skills.
             Args:
@@ -275,12 +288,12 @@ class ArenaService:
         """
         weapon = attacker.equipped_weapon
 
-        if weapon.weapon_type == WeaponType.MAGIC:
+        if weapon.magical:
             return max(0, weapon.strength + attacker.magic - defender.res)
         else:
             return max(0, weapon.strength + attacker.strength - defender.defense)
 
-    def calculate_damage_with_skill(self, attacker: "Fighter", defender: "Fighter"):
+    def calculate_damage_with_skill(self, attacker: Fighter, defender: Fighter):
         """
             Calculate the final damage dealt from the attacker to the defender, taking the skills into account.
             Args:
@@ -305,7 +318,7 @@ class ArenaService:
                 continue
 
             # boost attack values
-            if weapon.weapon_type == WeaponType.MAGIC:
+            if weapon.magical:
                 new_attacker_magic = skill.activate(attacker_magic, "magic", "attacker", attacker)
                 if new_attacker_magic != attacker_magic:
                     self.printer.print_after_prob_skill(attacker, skill.name)
@@ -318,7 +331,7 @@ class ArenaService:
                 attacker_attack = new_attacker_attack
 
             # attacker changes enemy defense stats
-            if weapon.weapon_type == WeaponType.MAGIC:
+            if weapon.magical:
                 new_defender_res = skill.activate(defender_res, "res", "attacker", attacker)
                 if new_defender_res != defender_res:
                     self.printer.print_after_prob_skill(attacker, skill.name)
@@ -354,7 +367,8 @@ class ArenaService:
 
         return max(0, int(damage))
 
-    def check_weapon_vantage(self, attacker_weapon, defender_weapon):
+    @staticmethod
+    def check_weapon_vantage(attacker_weapon, defender_weapon):
         """
         Determine weapon triangle advantage.
 

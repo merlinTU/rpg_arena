@@ -49,8 +49,6 @@ class StatBooster(Item):
         index_str = f"{index}) " if index is not None else ""
         name_width = name_width - len(index_str)
 
-        boost_str = f"{self.status} +{self.boost}"
-
         line = (
             f"{index_str}{self.name:<{name_width}} | "
             f"Uses: {self.uses:>{value_width}} | "
@@ -123,4 +121,4 @@ class StatBooster(Item):
         """
         Updates the price of the item based on its remaining durability.
         """
-        self.price = self.price * self.uses / self.max_uses
+        self.price = int(self.price * self.uses / self.max_uses)

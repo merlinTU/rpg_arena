@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .item import Item
 
 class HealingPotion(Item):
@@ -94,11 +96,11 @@ class HealingPotion(Item):
             name=self.name,
             heal_amount=self.heal_amount,
             uses=self.uses,
-            price=self.price
+            price= self.price
         )
 
     def update_price(self):
         """
         Updates the price of the item based on its remaining durability.
         """
-        self.price = self.price * self.uses / self.max_uses
+        self.price = int(self.price * self.uses / self.max_uses)

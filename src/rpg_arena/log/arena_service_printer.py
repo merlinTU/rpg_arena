@@ -144,12 +144,12 @@ class ArneaServicePrinter:
         arena = self.root_service.arena_service
 
         # Calculate combat stats for preview
-        player_hit = arena.caluclate_hit_chance(player_unit, enemy_unit)
-        player_crit = arena.caluclate_crit_chance(player_unit, enemy_unit)
+        player_hit = arena.calculate_hit_chance(player_unit, enemy_unit)
+        player_crit = arena.calculate_crit_chance(player_unit, enemy_unit)
         player_damage = arena.calculate_damage(player_unit, enemy_unit)
 
-        enemy_hit = arena.caluclate_hit_chance(enemy_unit, player_unit)
-        enemy_crit = arena.caluclate_crit_chance(enemy_unit, player_unit)
+        enemy_hit = arena.calculate_hit_chance(enemy_unit, player_unit)
+        enemy_crit = arena.calculate_crit_chance(enemy_unit, player_unit)
         enemy_damage = arena.calculate_damage(enemy_unit, player_unit)
 
         # Determine double attack eligibility

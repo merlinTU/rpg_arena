@@ -1,6 +1,12 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
 from rpg_arena.entity.weapon import Weapon
 from rpg_arena.entity.healing_potion import HealingPotion
 from rpg_arena.log.arena_service_printer import ArneaServicePrinter
+
+if TYPE_CHECKING:
+    from rpg_arena.service.root_service import RootService
 
 class ArenaActionService:
     """
@@ -12,7 +18,7 @@ class ArenaActionService:
 
     """
 
-    def __init__(self, root_service: "RootService"):
+    def __init__(self, root_service: RootService):
         """
         Initialize ArenaActionService with a reference to the root service.
 
@@ -156,7 +162,7 @@ class ArenaActionService:
         """
         player = self.root_service.current_game.player
         enemy = self.root_service.arena_service.enemy
-        if enemy.equipped_weapon == None:
+        if enemy.equipped_weapon is None:
             print("> Gladiator waits.")
         else:
             self.root_service.arena_service.make_fight_round(enemy, player)
