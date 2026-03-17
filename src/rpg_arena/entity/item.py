@@ -3,8 +3,6 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from rpg_arena.entity.fighter import Fighter
-
-
 class Item:
     """
     Represents an item in the game, which can be usable or non-usable
@@ -57,4 +55,10 @@ class Item:
         Returns:
             None
         """
+        pass
+
+    def copy(self):
+        return Item(self.name, self.usable, self.price)
+
+    def update_price(self):
         pass
