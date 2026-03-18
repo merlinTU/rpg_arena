@@ -81,8 +81,10 @@ class HealingPotion(Item):
             player_unit.hp = min(player_unit.hp, player_unit.max_hp)
 
             self.uses -= 1
-            if self.uses == 0:
+            if self.uses == 0 and not in_convoy:
                 player_unit.items.remove(self)
+            elif self.uses == 0 and in_convoy:
+                game.convoy.remove(self)
             return 1
 
     def copy(self):
