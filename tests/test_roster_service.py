@@ -10,6 +10,15 @@ from rpg_arena.entity.unit_class import UnitClass
 
 @pytest.fixture
 def roster_service_setup():
+    """
+    Fixture to create a test instance of RosterService with a mocked root service.
+
+    Returns:
+        tuple:
+            service (RosterService): The service under test.
+            root_service_mock (MagicMock): Mocked root service
+
+    """
     root_service_mock = MagicMock()
     root_service_mock.current_game = MagicMock(round=1)
 
@@ -182,11 +191,8 @@ def test_random_weapon_modifier_effect(roster_service_setup, unit_type, roll, ex
 def test_level_enemy_unit_all_strengths(roster_service_setup):
     """
     Test that `level_enemy_unit` correctly sets level, gold, and experience
-    for all enemy strength types (easy=0, medium=1, strong=2), using
+    for all enemy strength types using
     deterministic random values.
-
-    We patch `random.randint` and `random.normalvariate` to fixed values
-    to make the calculation deterministic and verify the results.
     """
     service, root = roster_service_setup
 
