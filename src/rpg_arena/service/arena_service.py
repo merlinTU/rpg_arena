@@ -348,7 +348,7 @@ class ArenaService:
                 continue
 
             # reduce attack value of the attacker
-            if weapon.weapon_type == WeaponType.MAGIC:
+            if weapon.magical:
                 new_attacker_magic = skill.activate(attacker_magic, "magic", "defender", defender)
                 if new_attacker_magic != attacker_magic:
                     self.printer.print_after_prob_skill(defender, skill.name)
@@ -360,7 +360,7 @@ class ArenaService:
                 attacker_attack = new_attacker_attack
 
         # calculate damage
-        if weapon.weapon_type == WeaponType.MAGIC:
+        if weapon.magical:
             damage = attacker_magic - defender_res
         else:
             damage = attacker_attack - defender_def
