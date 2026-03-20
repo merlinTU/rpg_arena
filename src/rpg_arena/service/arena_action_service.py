@@ -30,6 +30,7 @@ class ArenaActionService:
         """
         self.root_service = root_service
         self.printer = ArneaServicePrinter(root_service)
+        self.run = True # to break the for loop for testing
 
     def make_player_round_decision(self):
         """
@@ -40,7 +41,7 @@ class ArenaActionService:
         """
         self.printer.print_at_make_player_round_decsion()
 
-        while True:
+        while self.run:
             choice = input(">> Choose an option (1-4): ").strip().lower()
 
             if self.root_service.information_service.check_information_service_call(choice):
@@ -93,7 +94,7 @@ class ArenaActionService:
         Returns:
             None
         """
-        while True:
+        while self.run:
             choice = input(">> Choose an option (1-3): ").strip().lower()
 
             if self.root_service.information_service.check_information_service_call(choice):
@@ -124,7 +125,7 @@ class ArenaActionService:
         Returns:
             None
         """
-        while True:
+        while self.run:
             choice = input(">> Choose an option: ").strip().lower()
 
             if self.root_service.information_service.check_information_service_call(choice):
@@ -177,7 +178,7 @@ class ArenaActionService:
         game = self.root_service.current_game
         player = game.player
 
-        while True:
+        while self.run:
             choice = input(">> Command: ").strip().lower()
 
             if self.root_service.information_service.check_information_service_call(choice):
@@ -204,6 +205,7 @@ class ArenaActionService:
             if number > len(player.items):
                 print("Invalid item number.")
                 continue
+            number = number -1
 
             match command:
                 case "equip":
@@ -211,7 +213,7 @@ class ArenaActionService:
                     if not isinstance(weapon, Weapon):
                         print("You can't equip this item.")
                         continue
-                    player.equipped_weapon = player.items[number - 1]
+                    player.equipped_weapon = player.items[number]
                     print(player.name, "equipped,", weapon.name)
                     self.open_inventory()
                     return
