@@ -63,7 +63,7 @@ class GameServicePrinter():
             enemy_units (list[Fighter]): List of enemy units for the first round.
         """
         print("========================================")
-        print("           THE ARENA AWAITS")
+        print("           The Battle Awaits!")
         print("========================================")
 
         print("Three gladiators stand before you.\n")
@@ -191,13 +191,11 @@ class GameServicePrinter():
         self.print_unit_stats(player_unit, 1)
 
         time.sleep(1)
-        print(f"The arena falls silent as {player_unit.name} emerges victorious!")
-        print("Crowds cheer and banners wave in honor of your might.\n")
+        print(f"The crowd falls silent as {player_unit.name} stands victorious!")
+        print("Cheers erupt, and banners flutter high in honor of your unparalleled skill.\n")
         time.sleep(1)
 
-        print("You have conquered every foe, survived every trial,")
-        print("and claimed the title of ARENA CHAMPION!\n")
+        print("King Lorthar gazes upon you with a solemn pride and proclaims you the champion.")
+        print(f"From this day forth, you and your descendants shall bear the name of Stormhold!\n")
         time.sleep(1)
-
-        print("May your legend echo through the lands for generations to come! ⚔️")
         print("======================================\n")

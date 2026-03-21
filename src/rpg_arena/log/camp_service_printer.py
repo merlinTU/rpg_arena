@@ -28,6 +28,7 @@ class CampServicePrinter:
         - Shows available options such as entering the arena, managing equipment, visiting the merchant, or exiting the game.
         """
         print("\n======================================")
+        print(f"Round {self.root_service.current_game.round} / {self.root_service.current_game.end_round}")
 
         if self.root_service.current_game.round == 1:
             print("You enter the camp to prepare for your first battle")
@@ -36,6 +37,7 @@ class CampServicePrinter:
             print("A mighty foe awaits you in the next battle… Brace yourself!")
         else:
             print("You return to the camp after the battle.")
+
 
         print("\nWhat will you do?")
         print("1) Enter the arena")

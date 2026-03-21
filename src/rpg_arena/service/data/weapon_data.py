@@ -218,7 +218,7 @@ dire_thunder = Weapon(
 
 thunder_sword = Weapon(
     name="Thunder Sword",
-    weapon_type=WeaponType.MAGIC,
+    weapon_type=WeaponType.SWORD,
     strength=10,
     accuracy=95,
     uses=10,
@@ -230,7 +230,7 @@ thunder_sword = Weapon(
 
 fire_lance = Weapon(
     name="Fire Lance",
-    weapon_type=WeaponType.MAGIC,
+    weapon_type=WeaponType.LANCE,
     strength=13,
     accuracy=80,
     uses=10,
@@ -242,7 +242,7 @@ fire_lance = Weapon(
 
 ice_bow = Weapon(
     name="Ice Bow",
-    weapon_type=WeaponType.MAGIC,
+    weapon_type=WeaponType.BOW,
     strength=9,
     accuracy=105,
     uses=10,

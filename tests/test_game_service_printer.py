@@ -176,7 +176,7 @@ def test_print_after_start_first_round_with_enemy_units(capsys):
     captured = capsys.readouterr()
     output = captured.out
 
-    assert "THE ARENA AWAITS" in output
+    assert "The Battle Awaits!" in output
     assert "Three gladiators stand before you" in output
 
     assert "1) Enemy1" in output

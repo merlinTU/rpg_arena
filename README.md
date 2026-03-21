@@ -17,11 +17,15 @@ pip install git+https://github.com/merlinTU/rpg_arena.git
 
 ## Getting Started
 
-To play RPG-Arena enter this code:
+To play RPG-Arena enter this code in a .py file:
 ```python
 import rpg_arena
 
 rpg_arena.start_game()
+```
+Or you can start the game directly in the terminal using:
+```bash
+run rpg_arena start_game
 ```
 Once you start the game, a text-based interface will appear in your terminal. 
 The game will display messages, updates, and prompts as you progress. 
