@@ -35,6 +35,7 @@ rpg_arena.start_game()
 After typing this code the Text "Welcome to the Arena" is printed.
 
 ## 2. Help
+
 When ever the game asks you to make a decision, you can write "info x" or "check x" to get information
 about the [items](#46-items), [weapons](#45-weapons) or mechanics like [battles](#51-fight-round). You can also write
 "info player" or "info enemy" to check our own fighter and the enemy fighter.
@@ -43,16 +44,11 @@ about the [items](#46-items), [weapons](#45-weapons) or mechanics like [battles]
 
 ### 3.1. Choosing Your Fighter
 
----
-
 At the start of the game, you will be asked to choose one of five randomly generated [fighters](#41-character-generation). 
 Each fighter differs in [base stats](#42-status-values), [growth rates](#43-growth-values), [starting inventory](#46-items), 
 and [skills](#57-skills).
 
 ### 3.2. Enter the Camp
-
----
-
 Before each battle, your fighter visits the camp. At the camp, you can:
 
 - **Manage your inventory:** Use [items](#46-items) or equip [weapons](#45-weapons).  
@@ -63,9 +59,6 @@ Once preparations are complete, you can enter the arena.
 so choose this step carefully and make sure your fighter is ready for battle.
 
 ### 3.3. Enter the Arena
-
----
-
 When you enter the arena, you can choose between **three types of gladiators** to fight:
 
 1. **Easy Opponent:**  
@@ -82,8 +75,6 @@ When you enter the arena, you can choose between **three types of gladiators** t
 
 ### 3.4. Fight Enemy
 
----
-
 Combat in **RPG-Arena** is divided into player and enemy phases.  
 During your player phase, you have four options:
 
@@ -94,8 +85,6 @@ During your player phase, you have four options:
 
 ### 3.5. End Fight
 
----
-
 When a fighter's **HP drops to 0 or below**, the fight ends.  
 
 - **Victory:** If the enemy is defeated, your fighter earns EXP and gold. If your fighter gets 100 EXP, his level is increased by 1
@@ -104,8 +93,6 @@ and his stats are increased according to his [growths](#43-growth-values).
 
 
 ### 3.6. Aim of the Game
-
----
 
 After completing **20 arena battles**, your fighter will face a **powerful boss opponent**.  
 - One of three preset bosses will appear.  
@@ -117,17 +104,12 @@ Your goal is to **create the best build** for your fighter, balancing stats, [it
 
 ### 4.1. Character Generation
 
----
-
 The base stats and growth values of each character are **randomly generated**.  
 However, adjustments are applied based on the fighter’s [class](#44-classes), so that certain stats and growth values reflect the character’s role.  
 
 This means each character [starts](#42-status-values) with random base stats and [growth values](#43-growth-values), and then the **class modifiers** are added to create a final, balanced fighter suitable for their class.
 
 ### 4.2. Status Values
-
----
-
 - **HP:** The fighter’s health. If this reaches 0, the fighter is defeated.
 
 - **STR (Strength):** Determines physical [attack](#52-attack) power and damage dealt with non-magical [weapons](#45-weapons).
@@ -147,13 +129,9 @@ twice in a [fight round](#51-fight-round). This is also true for the enemy.
 
 ### 4.3. Growth Values
 
----
-
 Each status value has a corresponding **growth value** ranging between 0 and 1. Whenever your fighter **levels up**, each status has a chance equal to its growth value to **increase by 1 point**.  
 
 ### 4.4. Classes
-
----
 
 In **RPG-Arena**, each fighter belongs to a **class**, which defines their role, strengths, and weaknesses.  
 Classes influence **base stats, growth rates, and available [weapons](#45-weapons)**, shaping how each unit performs in battle.  
@@ -183,8 +161,6 @@ Use Axes.
 
 ### 4.5. Weapons
 
----
-
 Weapons are used in [combat](#51-fight-round) and each weapon has the following attributes:
 
 1. **Damage:** The base amount of damage the weapon deals on a successful [attack](#52-attack).  
@@ -197,8 +173,6 @@ Weapons are used in [combat](#51-fight-round) and each weapon has the following 
 
 ### 4.6. Items
 
----
-
 RPG-Arena features **two types of items**: **healing items** and **stat boosters**.  
 
 - **Healing Items:** Can be used during [battles](#51-fight-round) to restore a specific status value, such as HP.  
@@ -208,8 +182,6 @@ RPG-Arena features **two types of items**: **healing items** and **stat boosters
 
 ### 5.1. Fight Round
 
----
-
 Each battle takes place in **three phases**:
 
 1. **Initiative Phase:** Either the player or the enemy starts the [attack](#52-attack) based on speed or pre-determined initiative.  
@@ -218,13 +190,9 @@ Each battle takes place in **three phases**:
 
 ### 5.2. Attack
 
----
-
 Each attack has three main attributes: **Damage**, **Hit Chance**, and **Critical Chance**.
 
 ### 5.3. Damage
-
----
 
 The damage dealt depends on the type of attack:
 - **Physical Attack:** 
@@ -235,8 +203,6 @@ Damage = Attacker [MAG](#42-status-values) + [Weapon Might](#45-weapons) - Defen
 
 ### 5.4. Hit Chance
 
----
-
 The chance for an attack to hit is calculated using this formula:   
 Hit = [Weapon Hit ](#45-weapons) + (Attacker [SKL](#42-status-values) * 2) + (Attacker [LCK](#42-status-values) / 2) - (Defender [SPD](#42-status-values) * 2) + Defender [LCK](#42-status-values).  
 
@@ -245,14 +211,10 @@ both the attacker and the defender (for example, swords are strong against axes)
 
 ### 5.5. Critical Chance
 
----
-
 Critical hits deal triple damage and are calculated as:    
 Crit = Attacker [SKL](#42-status-values) / 2  - Defender [LCK](#42-status-values)
 
 ### 5.6. Weapon Advantage
-
----
 
 Some [weapons](#45-weapons) have advantages over others, following a classic triangle system:
 - **Swords > Axes** 
@@ -264,8 +226,6 @@ When a weapon has an advantage over the opponent, it grants a **+20 bonus to [Hi
 If a weapon is at a **disadvantage**, it receives a **-20 penalty to [Hit Chance](#54-hit-chance)**.
 
 ### 5.7. Skills
-
----
 
 There are three types of skills in RPG-Arena:
 
