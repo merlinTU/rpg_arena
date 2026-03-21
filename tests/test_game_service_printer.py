@@ -17,8 +17,6 @@ Tested functionality:
 - Printing fighter statistics
 - Printing arena round information
 """
-
-import pytest
 import re
 from unittest.mock import MagicMock
 
@@ -58,7 +56,7 @@ def test_print_after_start_game(capsys):
 
     captured = capsys.readouterr()
 
-    assert "Welcome to the Arena" in captured.out
+    assert "  Welcome to RPG-Arena!" in captured.out
     assert "Choose Your Fighter" in captured.out
     assert "Hero" in captured.out
 

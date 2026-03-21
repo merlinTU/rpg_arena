@@ -29,13 +29,12 @@ class GameServicePrinter():
             initial_units (list[Fighter]): List of player's initial units to choose from.
         """
         print("\n======================================")
-        print("🔥  Welcome to the Arena!  🔥")
+        print("  Welcome to RPG-Arena!")
         print("======================================\n")
         time.sleep(1)
-
-        print("The crowd roars as warriors from across the lands gather.")
-        print("Only the strongest will survive the trials of the arena.")
-        print("Choose your champion wisely!\n")
+        print("King Lorthar summoned the realm’s mightiest warriors to face one another in a grand tournament.")
+        print("Only the strongest would prevail, and the victor would earn not just glory and honor, but also the prestigious title of Duke of Stormhold, ruling from the soaring halls of Castle Stormhold.\n")
+        print("Hearing his call, the hundred fiercest warriors across the land gathered, and the most anticipated tournament the kingdom had ever seen was about to begin.")
         time.sleep(2)
 
         print("\n========================================")

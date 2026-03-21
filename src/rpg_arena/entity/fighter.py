@@ -81,7 +81,7 @@ class Fighter:
         self.res_growth = stats.growth_res
 
         self.equipped_weapon = None
-        self.gold = 9999
+        self.gold = 500
         self.exp = 0
         self.items = []
         self.skills = []
