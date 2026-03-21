@@ -1,19 +1,26 @@
-.. rpg_arena documentation master file, created by
-   sphinx-quickstart on Mon Mar  9 16:32:38 2026.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+RPG Arena
+==========
 
-RPG Arena Documentation
-=======================
+**A modern turn-based RPG arena simulation in Python.**
 
-Welcome to the official documentation for RPG Arena.
+Welcome to the official documentation of the RPG Arena project.
 
 Contents
 --------
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents
+Entity
+================
+- :doc:`Entity <entity>`
 
-   rpg_arena
+Service
+================
+- :doc:`Service <service>`
+
+Printer
+===============
+- :doc:`Printer <log>`
+
+Tests
+===============
+- :doc:`Tests <tests>`
 
