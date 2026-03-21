@@ -25,7 +25,7 @@ rpg_arena.start_game()
 ```
 Or you can start the game directly in the terminal using:
 ```bash
-run rpg_arena start_game
+rpg_arena start_game
 ```
 Once you start the game, a text-based interface will appear in your terminal. 
 The game will display messages, updates, and prompts as you progress. 
@@ -39,6 +39,8 @@ For detailed rules and gameplay instructions, see the [Rules](RULES.md) document
 
 If you encounter any issues, you can contact me here on 
 [Github](https://github.com/merlinTU/rpg_arena/issues).
-## Documentation \& Help
-...
+
+## Documentation
+See [Docs](docs/README.md).
+
 
