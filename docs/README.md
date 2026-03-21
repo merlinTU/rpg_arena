@@ -7,12 +7,12 @@ After cloning the repository into a local directory, you can generate the HTML d
 First, install the required dependencies:
 
 ```bash
-pip install .[docs]
+pip install ".[docs]"
 ```
 
 ## 2. Build the documentation
 
-Next, run the following command inside the project directory:
+Next, run the following command inside the rpg_arena/docs directory:
 
 ```bash
 make html
