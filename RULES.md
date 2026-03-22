@@ -32,13 +32,13 @@ import rpg_arena
 
 rpg_arena.start_game()
 ```
-After typing this code the Text "Welcome to the Arena" is printed.
+After typing this code the Text "Welcome to RPG-Arena" is printed.
 
 ## 2. Help
 
 When ever the game asks you to make a decision, you can write "info x" or "check x" to get information
 about the [items](#46-items), [weapons](#45-weapons) or mechanics like [battles](#51-fight-round). You can also write
-"info player" or "info enemy" to check our own fighter and the enemy fighter.
+"info player" or "info enemy" to check your own and the enemy fighter.
 
 ## 3. Game Flow:
 
@@ -82,6 +82,9 @@ During your player phase, you have four options:
 2. **Use Item / Equip Weapon:** Use an [item](#46-items) from your inventory or change your [weapon](#45-weapons).
 3. **Wait:** Do nothing this turn.
 4. **Surrender:** End the fight safely, but you will receive no rewards at the end of the battle.
+
+After your turn, the enemy phase begins. Enemy units will always attack as long as a weapon is equipped. Consider that your fighter can take damage from a counterattack when initiating a [fight round](#51-fight-round) 
+, as well as during the enemy phase.
 
 ### 3.5. End Fight
 
@@ -133,7 +136,7 @@ Each status value has a corresponding **growth value** ranging between 0 and 1. 
 
 ### 4.4. Classes
 
-In **RPG-Arena**, each fighter belongs to a **class**, which defines their role, strengths, and weaknesses.  
+In **RPG-Arena**, each fighter belongs to a **class**, which defines his role, strengths, and weaknesses.  
 Classes influence **base stats, growth rates, and available [weapons](#45-weapons)**, shaping how each unit performs in battle.  
 
 Here’s a brief overview of the main classes:
@@ -184,9 +187,12 @@ RPG-Arena features **two types of items**: **healing items** and **stat boosters
 
 Each battle takes place in **three phases**:
 
-1. **Initiative Phase:** Either the player or the enemy starts the [attack](#52-attack) based on speed or pre-determined initiative.  
+1. **Initiative Phase:** Either the player or the enemy starts the [attack](#52-attack) based on the current turn.  
 2. **Counterattack Phase:** The defending unit automatically counterattacks if able.  
-3. **Follow-Up Attack Phase:** If the attacker’s **Speed** is at least **5 points higher** than the defender’s, they perform a **follow-up attack**, hitting a second time.
+3. **Follow-Up Attack Phase:** If either the attacker or the defender has 5 more [Speed](#42-status-values)
+ points than the other, they perform a second attack.
+
+Beware: if your fighter initiates an attack, he should be able to withstand the counterattack and the next initiative attack in the enemy phase. Choosing to wait first can sometimes be helpful.
 
 ### 5.2. Attack
 
@@ -233,9 +239,9 @@ There are three types of skills in RPG-Arena:
    Increase battle-related stats such as [Hit Chance](#54-hit-chance), [Avoid](#54-hit-chance), or [Crit Chance](#55-critical-chance).  
 
 2. **Triggered Skills:**  
-   Activate during [combat](#51-fight-round) with a certain probability, providing effects like extra damage, healing, or stat boosts.  
+   Activate during [combat](#51-fight-round) with a certain probability, providing effects like extra or reduced damage.  
 
 3. **Weapon Skills:**  
-   Grant proficiency or special effects with specific types of [weapons](#45-weapons), allowing your fighter to use them more effectively.
+   Grant proficiency of [weapons](#45-weapons), allowing your fighter to use a wider variety of weapons.
 
 Skills can be purchased in the [Skill Shop](#32-enter-the-camp).
