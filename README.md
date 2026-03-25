@@ -27,6 +27,10 @@ Or you can start the game directly in the terminal using:
 ```bash
 rpg_arena start_game
 ```
+or:
+```bash
+-m rpg_arena
+```
 Once you start the game, a text-based interface will appear in your terminal. 
 The game will display messages, updates, and prompts as you progress. 
 You can interact with the game by typing your choices directly into the terminal whenever input is requested.
