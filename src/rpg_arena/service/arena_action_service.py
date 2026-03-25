@@ -205,7 +205,9 @@ class ArenaActionService:
             if number > len(player.items):
                 print("Invalid item number.")
                 continue
-            number = number -1
+
+            if not player.equipped_weapon:
+                number = number - 1
 
             match command:
                 case "equip":
@@ -223,9 +225,14 @@ class ArenaActionService:
                     if not item.usable:
                         print("Item not usable.")
                         continue
+
+                    if isinstance(item, HealingPotion) and (player.hp == player.max_hp):
+                        print("Your HP is already full.")
+                        continue
+
                     item.use(player, game)
                     if isinstance(item, HealingPotion):
-                        print(">", player.name, "used", item.name, "and has", player.hp, "now.")
+                        print(">", player.name, "used", item.name, "and has", player.hp, "HP now.")
                     break
 
                 case _:

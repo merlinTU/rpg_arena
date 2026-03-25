@@ -56,8 +56,8 @@ class HealingPotion(Item):
 
         line = (
             f"{index_str}{self.name:<{name_width}} | "
-            f"Uses: {self.uses:<{value_width}} | "
-            f"Heal: {heal_str:<{value_width}} | "
+            f"Uses: {self.uses:>{value_width}} | "
+            f"Heal: {heal_str:>{value_width}} | "
         )
 
         return f"{line}"
