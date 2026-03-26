@@ -172,8 +172,7 @@ class ArenaService:
         """
         return unit1.calc_corrected_speed() > unit2.calc_corrected_speed() + 5
 
-    @staticmethod
-    def check_weapon_destroyed(unit: Fighter):
+    def check_weapon_destroyed(self, unit: Fighter):
         """
         checks weather a weapon broke during the fight.
 
@@ -182,6 +181,12 @@ class ArenaService:
         """
         weapon = unit.equipped_weapon
         continue_fight = True
+
+        player = self.root_service.current_game.player
+        enemy = self.enemy
+
+        if player.hp <= 0 and enemy.hp <= 0:
+            return False
 
         if weapon is None:
             print(f"> {unit.name} can't do anything.")
