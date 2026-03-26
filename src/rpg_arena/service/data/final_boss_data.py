@@ -38,7 +38,7 @@ purgatio = Weapon(
 
 BOSS_DATA = [
     {
-        "name": "Gonzales the Giant",
+        "name": "Jupiter",
         "unit_class": UnitClass.WARRIOR,
         "level": 20,
         "hp": 80,
@@ -54,7 +54,7 @@ BOSS_DATA = [
         "equipped_weapon": great_axe
     },
     {
-        "name": "Sarah the Saint",
+        "name": "Venus",
         "unit_class": UnitClass.SAGE,
         "level": 20,
         "hp": 50,
@@ -70,7 +70,7 @@ BOSS_DATA = [
         "equipped_weapon": purgatio
     },
     {
-        "name": "Mercurius of the Thunder",
+        "name": "Merkur",
         "unit_class": UnitClass.MAGEKNIGHT,
         "level": 20,
         "hp": 60,
