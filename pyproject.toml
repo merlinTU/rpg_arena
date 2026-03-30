@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-rpg_arena = "rpg_arena:start_game"
+rpg_arena = "rpg_arena.main:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
