@@ -251,7 +251,7 @@ class ArneaServicePrinter:
         print("1) Attack")
         print("2) Check Inventory")
         print("3) Wait")
-        if self.root_service.current_game.round != self.root_service.end_round:
+        if self.root_service.current_game.round != self.root_service.current_game.end_round:
             print("4) Surrender")
         print("========================================\n")
 
