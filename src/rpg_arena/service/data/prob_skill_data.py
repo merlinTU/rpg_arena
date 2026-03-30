@@ -17,7 +17,7 @@ pavise = ProbSkill(
     target="str",
     value=2,
     type_="defender",
-    description="Skill Chance to halve physical damage.."
+    description="Skill Chance to halve physical damage."
 )
 
 aegis = ProbSkill(
@@ -26,7 +26,7 @@ aegis = ProbSkill(
     target="magic",
     value=2,
     type_="defender",
-    description="Skill chance to halve magical damage.."
+    description="Skill chance to halve magical damage."
 )
 
 brutal_hit = ProbSkill(

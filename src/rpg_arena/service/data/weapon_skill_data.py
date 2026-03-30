@@ -5,7 +5,7 @@ from rpg_arena.entity.weapon import WeaponType
 
 # Sword Skills
 sword_proficiency = WeaponSkill(
-    name="Sword Proficiency",
+    name="Sword Prof.",
     price=1000,
     weapon_type=WeaponType.SWORD,
     description="Allows the unit to wield swords."
@@ -13,7 +13,7 @@ sword_proficiency = WeaponSkill(
 
 # Lance Skills
 lance_proficiency = WeaponSkill(
-    name="Lance Proficiency",
+    name="Lance Prof.",
     price=1000,
     weapon_type=WeaponType.LANCE,
     description="Allows the unit to wield lances."
@@ -21,7 +21,7 @@ lance_proficiency = WeaponSkill(
 
 # Axe Skills
 axe_proficiency = WeaponSkill(
-    name="Axe Proficiency",
+    name="Axe Prof.",
     price=1000,
     weapon_type=WeaponType.AXE,
     description="Allows the unit to wield axes."
@@ -29,7 +29,7 @@ axe_proficiency = WeaponSkill(
 
 # Bow Skills
 bow_proficiency = WeaponSkill(
-    name="Bow Proficiency",
+    name="Bow Prof.",
     price=1000,
     weapon_type=WeaponType.BOW,
     description="Allows the unit to wield bows."
@@ -37,7 +37,7 @@ bow_proficiency = WeaponSkill(
 
 # Magic Skills
 magic_proficiency = WeaponSkill(
-    name="Magic Proficiency",
+    name="Magic Prof.",
     price=1000,
     weapon_type=WeaponType.MAGIC,
     description="Allows the unit to cast offensive magic spells."
