@@ -379,6 +379,41 @@ class ArneaServicePrinter:
         :param unit: The unit/player activating the skill
         :param skill_name: Name of the skill being activated
         """
-        # Assuming the unit has a 'name' attribute
         print(f"> {unit.name} activates {skill_name}!")
         time.sleep(1)
+
+    def print_final_boss(self, boss_name: str):
+        """
+        Prints the text for the final boss.
+
+        :param boss_name: The name of the final boss.
+        """
+        print("\nThe great tournament draws ever closer to its final breath.")
+        print("On this fateful day, countless mighty warriors have fallen in glory and ruin.\n")
+        time.sleep(1)
+        print("Yet the end is not yet written, ")
+        print("for one final sacrifice is still demanded by fate.\n")
+        time.sleep(2)
+
+        match boss_name:
+            case "Jupiter":
+                print("Before you stands a towering warrior, his body forged from pure muscle and battle-hardened strength.")
+                print("Clad in light armor, he moves with deadly speed and confidence.\n")
+                time.sleep(1)
+                print("In his hands rests a massive axe, its blade thirsting for the final clash.")
+                print("His presence alone shakes the ground beneath your feet...\n")
+
+            case "Venus":
+                print("Before you stands a delicate and breathtakingly beautiful woman,")
+                print("a gentle smile resting upon her face.\n")
+                time.sleep(1)
+                print("Yet despite her warmth, an icy aura surrounds her, sending a chill down your spine.")
+                print("There is something deeply unsettling behind her calm presence...\n")
+
+            case "Merkur":
+                print("Before you stands a knight clad in light, elegant golden armor,")
+                print("a dark cape flowing behind him with quiet grace.\n")
+                time.sleep(1)
+                print("He looks at you with a condescending gaze,")
+                print("as if your presence barely deserves his attention...\n")
+        time.sleep(2)

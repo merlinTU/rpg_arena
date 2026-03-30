@@ -55,7 +55,13 @@ class ArenaService:
             None
         """
         self.enemy = enemy
+
+        if self.root_service.current_game.round == self.root_service.current_game.end_round:
+            self.printer.print_final_boss(enemy.name)
+
         self.arena_simulation(self.root_service.current_game.player, enemy)
+
+
 
     def arena_simulation(self, player_unit: Fighter, enemy_unit: Fighter):
         """
