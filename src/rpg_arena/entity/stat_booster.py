@@ -100,7 +100,7 @@ class StatBooster(Item):
             case "DEF":
                 player_unit.defense += self.boost
             case "RES":
-                player_unit.resistance += self.boost
+                player_unit.res += self.boost
             case _:
                 print("Invalid stat type.")
                 return

@@ -138,13 +138,13 @@ class ArenaService:
         if second_unit.hp <= 0:
             return self.end_fight()
 
-        elif second_unit.hp > 0 and second_unit.equipped_weapon is not None:
-            self.make_attack(second_unit, first_unit, 3)
-            second_unit_weapon_broke = self.check_weapon_destroyed(second_unit)
-
         if second_unit.equipped_weapon is None:
             print(f"> {second_unit.name} can't do anything.")
             second_unit_weapon_broke = False
+
+        elif second_unit.hp > 0 and second_unit.equipped_weapon is not None:
+            self.make_attack(second_unit, first_unit, 3)
+            second_unit_weapon_broke = self.check_weapon_destroyed(second_unit)
 
         if first_unit.hp == 0:
             return self.end_fight()

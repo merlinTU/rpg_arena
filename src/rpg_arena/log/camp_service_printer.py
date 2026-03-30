@@ -87,6 +87,7 @@ class CampServicePrinter:
         if convoy:
             for weapon in convoy:
                 print(f"{index}) {weapon}")
+                index += 1
         else:
             print("Convoy is empty.")
         time.sleep(1)
