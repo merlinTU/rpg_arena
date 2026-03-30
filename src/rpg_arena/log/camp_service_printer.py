@@ -27,7 +27,7 @@ class CampServicePrinter:
         - Displays different messages depending on whether it is the first round.
         - Shows available options such as entering the arena, managing equipment, visiting the merchant, or exiting the game.
         """
-        print("\n======================================")
+        print("\n========================================")
         print(f"Round {self.root_service.current_game.round} / {self.root_service.current_game.end_round}")
 
         if self.root_service.current_game.round == 1:
@@ -44,7 +44,7 @@ class CampServicePrinter:
         print("2) Manage equipment")
         print("3) Visit the merchant")
         print("4) Exit game")
-        print("======================================\n")
+        print("========================================\n")
 
 
 
