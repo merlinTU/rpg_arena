@@ -83,7 +83,7 @@ class RosterService:
         # set enemy luck to 0
         if type_ != 1:
             unit.luck = 0
-            unit.hp_growth = 0.05
+            unit.luck_growth = 0.05
         return unit
 
     @staticmethod
