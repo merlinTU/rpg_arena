@@ -88,7 +88,7 @@ class ArneaServicePrinter:
             winner: Fighter who won.
             loser: Fighter who lost.
         """
-        print("\n---------- FIGHT OVER ------------------\n")
+        print("\n---------- FIGHT OVER -----------------\n")
         time.sleep(1)
 
         if winner != self.root_service.current_game.player:
@@ -101,7 +101,7 @@ class ArneaServicePrinter:
         time.sleep(1)
         print(f"{loser.name} is defeated!")
         time.sleep(2)
-        print("\n========== YOU WIN! =====================\n")
+        print("\n========== YOU WIN! ====================\n")
         time.sleep(2)
 
     def print_at_open_fight_menu(self):
