@@ -80,6 +80,10 @@ class RosterService:
         for attr, value in vars(unit).items():
             if isinstance(value, (int, float)) and value < 0:
                 setattr(unit, attr, 0)
+        # set enemy luck to 0
+        if type_ != 1:
+            unit.luck = 0
+            unit.hp_growth = 0.05
         return unit
 
     @staticmethod
