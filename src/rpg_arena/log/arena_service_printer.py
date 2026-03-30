@@ -148,9 +148,16 @@ class ArneaServicePrinter:
         player_crit = arena.calculate_crit_chance(player_unit, enemy_unit)
         player_damage = arena.calculate_damage(player_unit, enemy_unit)
 
-        enemy_hit = arena.calculate_hit_chance(enemy_unit, player_unit)
-        enemy_crit = arena.calculate_crit_chance(enemy_unit, player_unit)
-        enemy_damage = arena.calculate_damage(enemy_unit, player_unit)
+        if enemy_unit.equipped_weapon is None:
+            enemy_hit = 0
+            enemy_crit = 0
+            enemy_damage = 0
+            enemy_weapon_name = "None"
+        else:
+            enemy_hit = arena.calculate_hit_chance(enemy_unit, player_unit)
+            enemy_crit = arena.calculate_crit_chance(enemy_unit, player_unit)
+            enemy_damage = arena.calculate_damage(enemy_unit, player_unit)
+            enemy_weapon_name = enemy_unit.equipped_weapon.name
 
         # Determine double attack eligibility
         player_double = player_unit.calc_corrected_speed() > enemy_unit.calc_corrected_speed() + 5
@@ -196,7 +203,7 @@ class ArneaServicePrinter:
         print(player_info)
 
         # Enemy info
-        enemy_weapon_str = f"{enemy_unit.equipped_weapon.name:<{weapon_width - 1}}{enemy_weapon_arrow:>1}"
+        enemy_weapon_str = f"{enemy_weapon_name:<{weapon_width - 1}}{enemy_weapon_arrow:>1}"
         enemy_info = (
             f"2) {enemy_unit.name:<{name_width}} | "
             f"{enemy_weapon_str} | "
