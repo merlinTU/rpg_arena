@@ -64,7 +64,7 @@ class CampServicePrinter:
         convoy = self.root_service.current_game.convoy
 
         print("\n========================================")
-        print("            ITEM MANAGEMENT")
+        print("           ITEM MANAGEMENT")
         print("========================================")
         time.sleep(1)
 

@@ -28,9 +28,9 @@ class GameServicePrinter():
         Args:
             initial_units (list[Fighter]): List of player's initial units to choose from.
         """
-        print("\n======================================")
-        print("  Welcome to RPG-Arena!")
-        print("======================================\n")
+        print("\n========================================")
+        print("           Welcome to RPG-Arena!")
+        print("========================================\n")
         time.sleep(1)
         print("King Lorthar summoned the realm’s mightiest warriors to face one another in a grand tournament.")
         print("Only the strongest would prevail, and the victor would earn not just glory and honor, but also the prestigious title of Duke of Stormhold, ruling from the soaring halls of Castle Stormhold.\n")
@@ -183,9 +183,9 @@ class GameServicePrinter():
 
         # Dramatic victory message
         time.sleep(1)
-        print("\n======================================")
-        print("🏆  VICTORY!  🏆")
-        print("======================================\n")
+        print("\n========================================")
+        print("           VICTORY!")
+        print("========================================\n")
 
         time.sleep(1)
         self.print_unit_stats(player_unit, 1)
@@ -198,4 +198,4 @@ class GameServicePrinter():
         print("King Lorthar gazes upon you with a solemn pride and proclaims you the champion.")
         print(f"From this day forth, you and your descendants shall bear the name of Stormhold!\n")
         time.sleep(1)
-        print("======================================\n")
+        print("========================================\n")

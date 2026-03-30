@@ -61,7 +61,7 @@ class ArneaServicePrinter:
     def print_at_start_round(self):
         """Prints the header for the start of a battle round."""
         print("\n========================================")
-        print("        BATTLE START")
+        print("           BATTLE START")
         print("========================================")
         time.sleep(1)
 
@@ -75,9 +75,9 @@ class ArneaServicePrinter:
         """
         print("\n========================================")
         if first_unit == self.root_service.current_game.player:
-            print("        YOUR TURN")
+            print("           YOUR TURN")
         else:
-            print("        ENEMY TURN")
+            print("           ENEMY TURN")
         print("========================================")
 
     def print_after_arena_simulation(self, winner, loser):
@@ -88,7 +88,7 @@ class ArneaServicePrinter:
             winner: Fighter who won.
             loser: Fighter who lost.
         """
-        print("\n================ FIGHT OVER ================\n")
+        print("\n---------- FIGHT OVER ----------\n")
         time.sleep(1)
 
         if winner != self.root_service.current_game.player:
@@ -101,7 +101,7 @@ class ArneaServicePrinter:
         time.sleep(1)
         print(f"{loser.name} is defeated!")
         time.sleep(2)
-        print("\n================ YOU WIN! =================\n")
+        print("\n========== YOU WIN! ==========\n")
         time.sleep(2)
 
     def print_at_open_fight_menu(self):
@@ -279,14 +279,14 @@ class ArneaServicePrinter:
 
         if not other_items:
             print("No other items in inventory.")
-            print("\n============================\n")
+            print("\n========================================\n")
             self.print_inventar_choice()
             return
 
         for index, item in enumerate(other_items, start=1):
             print(f"{index}) {item}")
 
-        print("============================")
+        print("========================================")
 
         self.print_inventar_choice()
 
