@@ -206,8 +206,7 @@ class ArenaActionService:
                 print("Invalid item number.")
                 continue
 
-            if not player.equipped_weapon:
-                number = number - 1
+            number -= 1
 
             match command:
                 case "equip":

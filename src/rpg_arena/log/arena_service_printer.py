@@ -88,7 +88,7 @@ class ArneaServicePrinter:
             winner: Fighter who won.
             loser: Fighter who lost.
         """
-        print("\n---------- FIGHT OVER ----------\n")
+        print("\n---------- FIGHT OVER ------------------\n")
         time.sleep(1)
 
         if winner != self.root_service.current_game.player:
@@ -101,7 +101,7 @@ class ArneaServicePrinter:
         time.sleep(1)
         print(f"{loser.name} is defeated!")
         time.sleep(2)
-        print("\n========== YOU WIN! ==========\n")
+        print("\n========== YOU WIN! =====================\n")
         time.sleep(2)
 
     def print_at_open_fight_menu(self):
@@ -275,15 +275,15 @@ class ArneaServicePrinter:
             print("--------------------------------")
 
         # other items in inventory
-        other_items = [item for item in player_unit.items if item != player_unit.equipped_weapon]
+        items = player_unit.items
 
-        if not other_items:
+        if not items:
             print("No other items in inventory.")
             print("\n========================================\n")
             self.print_inventar_choice()
             return
 
-        for index, item in enumerate(other_items, start=1):
+        for index, item in enumerate(items, start=1):
             print(f"{index}) {item}")
 
         print("========================================")
