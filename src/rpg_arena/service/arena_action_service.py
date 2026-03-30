@@ -67,6 +67,9 @@ class ArenaActionService:
                 print(">", self.root_service.current_game.player.name, "waits")
                 break
             elif choice == 4:
+                if self.root_service.current_game.round == self.root_service.current_game.end_round:
+                    print("You can not surrender this fight!")
+                    continue
                 confirm = input(">> Are you sure you want to surrender? (y/n): ").lower()
                 if confirm == "y":
                     self.root_service.arena_service.continue_fight = "surrender"
